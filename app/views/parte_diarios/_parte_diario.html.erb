@@ -1,0 +1,100 @@
+<%= form_with(model: parte_diario, local: true) do |form| %>
+  <div style="margin-bottom: 15px;">
+    <%= form.label :sector %><br>
+    <%= form.text_field :sector, class: "form-control" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :operario_id, "Operario" %><br>
+    <%= form.collection_select :operario_id, Operario.where(activo: true), :id, :nombre, prompt: "Seleccione un operario", class: "form-control" %>
+  </div>
+
+  <h3>Tareas Realizadas</h3>
+  <div id="tareas-container">
+    <%= form.fields_for :tareas_realizadas do |tarea_form| %>
+      <div class="tarea-fields" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 15px;">
+        <%= tarea_form.label :descripcion %><br>
+        <%= tarea_form.text_field :descripcion, class: "form-control" %>
+
+        <%= tarea_form.label :cantidad_ejecutada %><br>
+        <%= tarea_form.number_field :cantidad_ejecutada, class: "form-control" %>
+
+        <%= tarea_form.label :unidad %><br>
+        <%= tarea_form.text_field :unidad, class: "form-control" %>
+
+        <%= tarea_form.label :hora_inicio %><br>
+        <%= tarea_form.time_select :hora_inicio, {ampm: true}, class: "form-control" %>
+
+        <%= tarea_form.label :hora_fin %><br>
+        <%= tarea_form.time_select :hora_fin, {ampm: true}, class: "form-control" %>
+
+        <%= tarea_form.label :observacion %><br>
+        <%= tarea_form.text_area :observacion, rows: 2, class: "form-control" %>
+
+        <%= tarea_form.check_box :_destroy %>
+        <%= tarea_form.label :_destroy, "Eliminar esta tarea" %>
+      </div>
+    <% end %>
+  </div>
+
+  <h3>Tiempos Muertos</h3>
+  <div id="tiempos-container">
+    <%= form.fields_for :tiempo_muertos do |tiempo_form| %>
+      <div class="tiempo-fields" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 15px;">
+        <%= tiempo_form.label :tipo_tiempo_muerto_id, "Tipo" %><br>
+        <%= tiempo_form.collection_select :tipo_tiempo_muerto_id, TipoTiempoMuerto.all, :id, :nombre, prompt: "Seleccione un tipo", class: "form-control" %>
+
+        <%= tiempo_form.label :descripcion %><br>
+        <%= tiempo_form.text_field :descripcion, class: "form-control" %>
+
+        <%= tiempo_form.label :hora_inicio %><br>
+        <%= tiempo_form.time_select :hora_inicio, {ampm: true}, class: "form-control" %>
+
+        <%= tiempo_form.label :hora_fin %><br>
+        <%= tiempo_form.time_select :hora_fin, {ampm: true}, class: "form-control" %>
+
+        <%= tiempo_form.label :observacion %><br>
+        <%= tiempo_form.text_area :observacion, rows: 2, class: "form-control" %>
+
+        <%= tiempo_form.check_box :_destroy %>
+        <%= tiempo_form.label :_destroy, "Eliminar este tiempo muerto" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "Guardar Parte Diario", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function cloneTemplate(containerId) {
+      const container = document.getElementById(containerId);
+      const template = container.children[0].cloneNode(true);
+      let index = container.children.length;
+
+      template.querySelectorAll("input, textarea, select").forEach(el => {
+        el.name = el.name.replace(/\d+/, index);
+        el.id = el.id.replace(/\d+/, index);
+        if (el.type !== "hidden" && el.type !== "checkbox") el.value = "";
+        if (el.type === "checkbox") el.checked = false;
+      });
+      container.appendChild(template);
+    }
+
+    const tareasBtn = document.createElement("button")
+    tareasBtn.type = "button"
+    tareasBtn.innerText = "+ Agregar Tarea"
+    tareasBtn.className = "btn btn-secondary"
+    document.getElementById("tareas-container").insertAdjacentElement("afterend", tareasBtn)
+    tareasBtn.addEventListener("click", () => cloneTemplate("tareas-container"))
+
+    const tiemposBtn = document.createElement("button")
+    tiemposBtn.type = "button"
+    tiemposBtn.innerText = "+ Agregar Tiempo Muerto"
+    tiemposBtn.className = "btn btn-secondary"
+    document.getElementById("tiempos-container").insertAdjacentElement("afterend", tiemposBtn)
+    tiemposBtn.addEventListener("click", () => cloneTemplate("tiempos-container"))
+  })
+</script>

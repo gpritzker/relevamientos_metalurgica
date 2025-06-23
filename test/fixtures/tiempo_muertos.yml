@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parte_diario: one
+  tipo_tiempo_muerto: one
+  hora_inicio: 2025-06-18 17:32:19
+  hora_fin: 2025-06-18 17:32:19
+  observaciones: MyText
+
+two:
+  parte_diario: two
+  tipo_tiempo_muerto: two
+  hora_inicio: 2025-06-18 17:32:19
+  hora_fin: 2025-06-18 17:32:19
+  observaciones: MyText

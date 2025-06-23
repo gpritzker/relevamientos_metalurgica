@@ -1,0 +1,122 @@
+<div class="container mt-4">
+  <%= form_with url: dashboard_path, method: :get, local: true, class: "row g-3 mb-4" do %>
+    <div class="col-md-3">
+      <%= label_tag :sector_id, "Sector", class: "form-label" %>
+      <%= select_tag :sector_id, options_from_collection_for_select(Sector.all, :id, :nombre, params[:sector_id]), include_blank: "Todos", class: "form-select" %>
+    </div>
+
+    <div class="col-md-3">
+      <%= label_tag :operario_id, "Operario", class: "form-label" %>
+      <%= select_tag :operario_id, options_from_collection_for_select(Operario.all, :id, :nombre, params[:operario_id]), include_blank: "Todos", class: "form-select" %>
+    </div>
+
+    <div class="col-md-3">
+      <%= label_tag :desde, "Desde", class: "form-label" %>
+      <%= date_field_tag :desde, params[:desde], class: "form-control" %>
+    </div>
+
+    <div class="col-md-3">
+      <%= label_tag :hasta, "Hasta", class: "form-label" %>
+      <%= date_field_tag :hasta, params[:hasta], class: "form-control" %>
+    </div>
+
+    <div class="col-12">
+      <%= submit_tag "Filtrar", class: "btn btn-primary" %>
+      <%= link_to "Limpiar", dashboard_path, class: "btn btn-secondary ms-2" %>
+    </div>
+  <% end %>
+
+  <h1 class="mb-4">📊 Dashboard de Producción</h1>
+
+  <!-- Ranking de Operarios -->
+  <h3 class="mt-4">🏆 Ranking de Operarios por Tareas Realizadas</h3>
+  <table class="table table-striped table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Operario</th>
+        <th>Total de Tareas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tareas.includes(:parte_diario).group_by { |t| t.parte_diario.operario_id }.each do |operario_id, tareas| %>
+        <% operario = Operario.find_by(id: operario_id) %>
+        <tr>
+          <td><%= operario&.nombre || "Sin asignar" %></td>
+          <td><%= tareas.size %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Partes Diarios por Fecha -->
+  <h3 class="mt-5">📅 Partes Diarios por Fecha</h3>
+  <table class="table table-sm table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Fecha</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @parte_diarios.group(:fecha).order(fecha: :desc).limit(10).count.each do |fecha, cantidad| %>
+        <% next if fecha.nil? %>
+        <tr>
+          <td><%= fecha.strftime("%d/%m/%Y") %></td>
+          <td><%= cantidad %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Tiempos Muertos por Tipo -->
+  <h3 class="mt-5">⏱️ Tiempos Muertos por Tipo</h3>
+<table class="table table-bordered table-sm">
+  <thead class="table-light">
+    <tr>
+      <th>Tipo</th>
+      <th>Cantidad</th>
+      <th>Operarios</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tiempos_muertos.group_by(&:tipo_tiempo_muerto_id).each do |tipo_id, tiempos| %>
+      <% tipo = TipoTiempoMuerto.find_by(id: tipo_id)&.nombre || "Sin tipo" %>
+      <% operarios = tiempos.map { |t| t.parte_diario&.operario }.compact.uniq %>
+      <tr>
+        <td><%= tipo %></td>
+        <td><%= tiempos.size %></td>
+        <td>
+          <% if operarios.any? %>
+            <ul class="mb-0 ps-3">
+              <% operarios.each do |op| %>
+                <li><%= op.nombre %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <em>No asignados</em>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  <!-- Estado de Tareas -->
+  <h3 class="mt-5">📌 Estado de Tareas Realizadas</h3>
+  <ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between">
+      🟡 En proceso
+      <span class="badge bg-warning text-dark"><%= @tareas.where(en_proceso: true).count %></span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+      ✅ Finalizadas
+      <span class="badge bg-success"><%= @tareas.where(finalizado: true).count %></span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+      🕘 Pendientes
+      <span class="badge bg-secondary">
+        <%= @tareas.where(en_proceso: false, finalizado: false).count %>
+      </span>
+    </li>
+  </ul>
+</div>

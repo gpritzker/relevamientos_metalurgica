@@ -1,0 +1,38 @@
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<div class="card mt-4 shadow-sm">
+  <div class="card-header bg-dark text-white">
+    <h2 class="mb-0">Detalle de Tarea Realizada</h2>
+  </div>
+
+  <div class="card-body">
+    <p><strong>Descripción:</strong> <%= @tarea_realizada.descripcion %></p>
+    <p><strong>Cantidad Ejecutada:</strong> <%= @tarea_realizada.cantidad_ejecutada %></p>
+    <p><strong>Unidad:</strong> <%= @tarea_realizada.unidad %></p>
+    <% if @tarea_realizada.nro_modulo.present? %>
+      <p><strong>Nro. Módulo:</strong> <%= @tarea_realizada.nro_modulo %></p>
+    <% end %>
+    <% if @tarea_realizada.hora_inicio && @tarea_realizada.hora_fin %>
+      <p><strong>Inicio:</strong> <%= @tarea_realizada.hora_inicio.strftime("%H:%M") %></p>
+      <p><strong>Fin:</strong> <%= @tarea_realizada.hora_fin.strftime("%H:%M") %></p>
+    <% end %>
+    <% if @tarea_realizada.observaciones.present? %>
+      <p><strong>Observaciones:</strong> <%= @tarea_realizada.observaciones %></p>
+    <% end %>
+    <p><strong>Estado:</strong>
+      <%= @tarea_realizada.en_proceso? ? "🟡 En proceso" : "" %>
+      <%= @tarea_realizada.finalizado? ? "✅ Finalizado" : "" %>
+      <%= (!@tarea_realizada.en_proceso && !@tarea_realizada.finalizado) ? "🕘 Pendiente" : "" %>
+    </p>
+  </div>
+
+  <div class="card-footer text-end">
+    <%= link_to "Editar", edit_tarea_realizada_path(@tarea_realizada), class: "btn btn-warning me-2" %>
+    <%= link_to "Volver al listado", tarea_realizadas_path, class: "btn btn-secondary me-2" %>
+    <%= button_to "Eliminar", @tarea_realizada, method: :delete,
+                  data: { confirm: "¿Estás seguro de eliminar esta tarea?" },
+                  class: "btn btn-danger" %>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<%= form_with(model: sector, local: true, class: "mt-4") do |form| %>
+  <% if sector.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(sector.errors.count, "error") %> impidieron guardar el sector:</h5>
+      <ul>
+        <% sector.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :nombre, class: "form-label" %>
+    <%= form.text_field :nombre, class: "form-control", placeholder: "Ej. Corte y Plegado" %>
+  </div>
+
+  <div class="text-end">
+    <%= form.submit sector.new_record? ? "Crear Sector" : "Actualizar Sector", class: "btn btn-primary" %>
+  </div>
+<% end %>

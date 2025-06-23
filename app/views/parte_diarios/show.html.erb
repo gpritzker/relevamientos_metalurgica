@@ -1,0 +1,43 @@
+<h1>Parte Diario</h1>
+
+<div class="mb-3">
+  <strong>Fecha:</strong> <%= @parte_diario.fecha.strftime('%d/%m/%Y') if @parte_diario.fecha %><br>
+  <strong>Sector:</strong> <%= @parte_diario.sector %><br>
+  <strong>Turno:</strong> <%= @parte_diario.turno %><br>
+  <strong>Operario:</strong> <%= @parte_diario.operario&.nombre %>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h3 class="mb-0">Tareas Realizadas</h3>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% @parte_diario.tareas_realizadas.each do |tarea| %>
+      <li class="list-group-item">
+        <strong><%= tarea.descripcion %></strong> - Cantidad: <%= tarea.cantidad_ejecutada %> <%= tarea.unidad %><br>
+        <small>Inicio: <%= tarea.hora_inicio.strftime('%H:%M') if tarea.hora_inicio %> |
+               Fin: <%= tarea.hora_fin.strftime('%H:%M') if tarea.hora_fin %></small><br>
+        <em>Observaciones:</em> <%= tarea.observaciones %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h3 class="mb-0">Tiempos Muertos</h3>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% @parte_diario.tiempos_muertos.each do |tm| %>
+      <li class="list-group-item">
+        <strong><%= tm.tipo_tiempo_muerto&.nombre %></strong> - <%= tm.descripcion %><br>
+        <small>Inicio: <%= tm.hora_inicio.strftime('%H:%M') if tm.hora_inicio %> |
+               Fin: <%= tm.hora_fin.strftime('%H:%M') if tm.hora_fin %></small><br>
+        <em>Observaciones:</em> <%= tm.observaciones %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= link_to 'Editar', edit_parte_diario_path(@parte_diario), class: "btn btn-primary" %>
+<%= link_to 'Volver', parte_diarios_path, class: "btn btn-secondary ms-2" %>

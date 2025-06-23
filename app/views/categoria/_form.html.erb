@@ -1,0 +1,26 @@
+<%= form_with(model: categorium, local: true, class: "mt-4") do |form| %>
+  <% if categorium.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(categorium.errors.count, "error") %> impidieron guardar la categoría:</h5>
+      <ul>
+        <% categorium.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :nombre, class: "form-label" %>
+    <%= form.text_field :nombre, class: "form-control", placeholder: "Ej. Oficial, Supervisor, etc." %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :descripcion, class: "form-label" %>
+    <%= form.text_field :descripcion, class: "form-control", placeholder: "Descripción breve" %>
+  </div>
+
+  <div class="text-end">
+    <%= form.submit categorium.new_record? ? "Crear Categoría" : "Actualizar Categoría", class: "btn btn-primary" %>
+  </div>
+<% end %>

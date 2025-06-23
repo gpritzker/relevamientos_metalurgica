@@ -1,0 +1,98 @@
+<%= form_with(model: operario, local: true, class: "mt-4") do |form| %>
+  <% if operario.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(operario.errors.count, "error") %> impidieron guardar el operario:</h5>
+      <ul>
+        <% operario.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :nombre, class: "form-label" %>
+      <%= form.text_field :nombre, class: "form-control" %>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <%= form.label :legajo, class: "form-label" %>
+      <%= form.text_field :legajo, class: "form-control" %>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <%= form.label :sector, class: "form-label" %>
+      <%= form.text_field :sector, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :fecha_nacimiento, "Fecha de Nacimiento", class: "form-label" %>
+      <%= form.date_field :fecha_nacimiento, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :fecha_ingreso, "Fecha de Ingreso", class: "form-label" %>
+      <%= form.date_field :fecha_ingreso, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :obra_social, class: "form-label" %>
+      <%= form.text_field :obra_social, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :cuil, class: "form-label" %>
+      <%= form.text_field :cuil, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :cbu, class: "form-label" %>
+      <%= form.text_field :cbu, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :domicilio, class: "form-label" %>
+      <%= form.text_field :domicilio, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :telefono, class: "form-label" %>
+      <%= form.text_field :telefono, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :ciudad, class: "form-label" %>
+      <%= form.text_field :ciudad, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :categoria, class: "form-label" %>
+      <%= form.collection_select :empresa_id, Categorium.all, :id, :nombre, { include_blank: "Seleccionar" }, { class: "form-select" } %>
+    </div>
+
+    <div class="col-md-3 form-check mb-3">
+      <%= form.check_box :sindicalizado, class: "form-check-input" %>
+      <%= form.label :sindicalizado, "¿Sindicalizado?", class: "form-check-label" %>
+    </div>
+
+    <div class="col-md-3 form-check mb-3">
+      <%= form.check_box :residente, class: "form-check-input" %>
+      <%= form.label :residente, "¿Residente?", class: "form-check-label" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :empresa_id, "Empresa", class: "form-label" %>
+      <%= form.collection_select :empresa_id, Empresa.all, :id, :nombre, { include_blank: "Seleccionar" }, { class: "form-select" } %>
+    </div>
+
+    <div class="col-12 form-check mb-4">
+      <%= form.check_box :activo, class: "form-check-input" %>
+      <%= form.label :activo, "¿Activo?", class: "form-check-label" %>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <%= form.submit operario.new_record? ? "Crear Operario" : "Actualizar Operario", class: "btn btn-primary" %>
+  </div>
+<% end %>

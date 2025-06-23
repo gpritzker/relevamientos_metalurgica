@@ -1,0 +1,71 @@
+<%= form_with(model: tarea_realizada, local: true, class: "container mt-4") do |form| %>
+  <% if tarea_realizada.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(tarea_realizada.errors.count, "error") %> impidieron guardar la tarea:</h4>
+      <ul>
+        <% tarea_realizada.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :parte_diario_id, "Parte Diario", class: "form-label" %>
+    <%= form.number_field :parte_diario_id, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :descripcion, class: "form-label" %>
+    <%= form.text_field :descripcion, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :tarea_realizada, class: "form-label" %>
+    <%= form.text_field :tarea_realizada, class: "form-control" %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :cantidad_ejecutada, class: "form-label" %>
+      <%= form.number_field :cantidad_ejecutada, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :nro_modulo, "Nro Módulo", class: "form-label" %>
+      <%= form.text_field :nro_modulo, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :hora_inicio, "Hora de Inicio", class: "form-label" %>
+      <%= form.datetime_field :hora_inicio, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :hora_fin, "Hora de Fin", class: "form-label" %>
+      <%= form.datetime_field :hora_fin, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-check mb-3">
+    <%= form.check_box :en_proceso, class: "form-check-input", id: "en_proceso" %>
+    <%= form.label :en_proceso, "En proceso", class: "form-check-label" %>
+  </div>
+
+  <div class="form-check mb-3">
+    <%= form.check_box :finalizado, class: "form-check-input", id: "finalizado" %>
+    <%= form.label :finalizado, "Finalizado", class: "form-check-label" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :observaciones, class: "form-label" %>
+    <%= form.text_area :observaciones, rows: 3, class: "form-control" %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.submit "Guardar", class: "btn btn-primary" %>
+    <%= link_to "Volver", tarea_realizadas_path, class: "btn btn-secondary ms-2" %>
+  </div>
+<% end %>

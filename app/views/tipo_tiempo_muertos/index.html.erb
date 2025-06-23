@@ -1,0 +1,37 @@
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Tipos de Tiempo Muerto</h1>
+  <%= link_to 'Nuevo Tipo', new_tipo_tiempo_muerto_path, class: "btn btn-success" %>
+</div>
+
+<% if @tipo_tiempo_muertos.any? %>
+  <table class="table table-bordered table-striped">
+    <thead class="table-light">
+      <tr>
+        <th>Nombre</th>
+        <th class="text-end">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tipo_tiempo_muertos.each do |tipo| %>
+        <tr>
+          <td><%= tipo.nombre %></td>
+          <td class="text-end">
+            <%= link_to 'Ver', tipo_tiempo_muerto_path(tipo), class: "btn btn-info btn-sm me-1" %>
+            <%= link_to 'Editar', edit_tipo_tiempo_muerto_path(tipo), class: "btn btn-warning btn-sm me-1" %>
+            <%= link_to 'Eliminar', tipo_tiempo_muerto_path(tipo), method: :delete,
+                          data: { confirm: '¿Estás seguro de eliminar este tipo?' },
+                          class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-secondary text-center">
+    No hay tipos de tiempo muerto registrados.
+  </div>
+<% end %>

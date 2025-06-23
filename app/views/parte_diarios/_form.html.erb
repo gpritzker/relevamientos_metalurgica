@@ -1,0 +1,158 @@
+<%= form_with(model: parte_diario, local: true) do |form| %>
+ <div class="mb-3">
+    <%= form.label :fecha, class: "form-label" %>
+    <%= form.date_field :fecha, class: "form-control" %>
+  </div>
+
+  <div class="mb-4">
+  <label class="form-label fw-bold" for="parte_diario_sector_id">🧭 Sector</label>
+  <div class="input-group">
+    <span class="input-group-text bg-light"><i class="bi bi-diagram-3-fill"></i></span>
+    <%= form.collection_select :sector_id, Sector.all, :id, :nombre, { prompt: "Seleccione un sector" }, class: "form-select" %>
+  </div>
+</div>
+
+<div class="mb-4">
+  <label class="form-label fw-bold" for="parte_diario_operario_id">👷 Operario</label>
+  <div class="input-group">
+    <span class="input-group-text bg-light"><i class="bi bi-person-badge-fill"></i></span>
+    <%= form.collection_select :operario_id, Operario.where(activo: true), :id, :nombre, { prompt: "Seleccione un operario" }, class: "form-select" %>
+  </div>
+</div>
+
+  <h4>Tareas Realizadas</h4>
+  <div id="tareas-container">
+    <%= form.fields_for :tareas_realizadas do |tarea_form| %>
+      <div class="border p-3 mb-3 rounded">
+        <div class="mb-2">
+          <%= tarea_form.label :descripcion, class: "form-label" %>
+          <%= tarea_form.text_field :descripcion, class: "form-control" %>
+        </div>
+
+        <div class="mb-2">
+          <%= tarea_form.label :cantidad_ejecutada, class: "form-label" %>
+          <%= tarea_form.number_field :cantidad_ejecutada, class: "form-control" %>
+        </div>
+        <div class="mb-2">
+          <%= tarea_form.label :nro_modulo, "Nro Módulo", class: "form-label" %>
+          <%= tarea_form.text_field :nro_modulo, class: "form-control" %>
+        </div>
+
+        <div class="mb-2">
+          <%= tarea_form.label :tarea_realizada, class: "form-label" %>
+          <%= tarea_form.text_field :unidad, class: "form-control" %>
+        </div>
+
+       <div class="row">
+          <div class="col-md-6">
+            <%= tarea_form.label :hora_inicio, class: "form-label" %>
+            <%= tarea_form.time_select :hora_inicio, {ampm: true, minute_step: 1}, {class: "form-control d-inline w-auto me-2"} %>
+          </div>
+          <div class="col-md-6">
+            <%= tarea_form.label :hora_fin, class: "form-label" %>
+            <%= tarea_form.time_select :hora_fin, {ampm: true, minute_step: 1}, {class: "form-control d-inline w-auto me-2"} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <%= tarea_form.label :en_proceso, class: "form-label d-block" %>
+            <div class="form-check">
+              <%= tarea_form.check_box :en_proceso, class: "form-check-input" %>
+              <%= tarea_form.label :en_proceso, "¿En proceso?", class: "form-check-label" %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <%= tarea_form.label :finalizado, class: "form-label d-block" %>
+            <div class="form-check">
+              <%= tarea_form.check_box :finalizado, class: "form-check-input" %>
+              <%= tarea_form.label :finalizado, "¿Finalizado?", class: "form-check-label" %>
+            </div>
+          </div>
+        </div>
+        <div class="mb-2">
+          <%= tarea_form.label :observaciones, class: "form-label" %>
+          <%= tarea_form.text_area :observaciones, rows: 2, class: "form-control" %>
+        </div>
+
+        <div class="form-check">
+          <%= tarea_form.check_box :_destroy, class: "form-check-input" %>
+          <%= tarea_form.label :_destroy, "Eliminar esta tarea", class: "form-check-label" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <h4>Tiempos Muertos</h4>
+  <div id="tiempos-container">
+    <%= form.fields_for :tiempos_muertos do |tiempo_form| %>
+      <div class="border p-3 mb-3 rounded">
+        <div class="mb-2">
+          <%= tiempo_form.label :tipo_tiempo_muerto_id, "Tipo", class: "form-label" %>
+          <%= tiempo_form.collection_select :tipo_tiempo_muerto_id, TipoTiempoMuerto.all, :id, :nombre, prompt: "Seleccione un tipo", class: "form-select" %>
+        </div>
+
+        <div class="mb-2">
+          <%= tiempo_form.label :descripcion, class: "form-label" %>
+          <%= tiempo_form.text_field :descripcion, class: "form-control" %>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= tiempo_form.label :hora_inicio, class: "form-label" %>
+            <%= tiempo_form.time_select :hora_inicio, {ampm: true, minute_step: 1}, {class: "form-control d-inline w-auto me-2"} %>
+          </div>
+          <div class="col-md-6">
+            <%= tiempo_form.label :hora_fin, class: "form-label" %>
+            <%= tiempo_form.time_select :hora_fin, {ampm: true, minute_step: 1}, {class: "form-control d-inline w-auto me-2"} %>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <%= tiempo_form.label :observaciones, class: "form-label" %>
+          <%= tiempo_form.text_area :observaciones, rows: 2, class: "form-control" %>
+        </div>
+
+        <div class="form-check">
+          <%= tiempo_form.check_box :_destroy, class: "form-check-input" %>
+          <%= tiempo_form.label :_destroy, "Eliminar este tiempo muerto", class: "form-check-label" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-3">
+    <%= form.submit "Guardar Parte Diario", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function cloneTemplate(containerId) {
+      const container = document.getElementById(containerId);
+      const template = container.children[0].cloneNode(true);
+      let index = container.children.length;
+
+      template.querySelectorAll("input, textarea, select").forEach(el => {
+        el.name = el.name.replace(/\d+/, index);
+        el.id = el.id.replace(/\d+/, index);
+        if (el.type !== "hidden" && el.type !== "checkbox") el.value = "";
+        if (el.type === "checkbox") el.checked = false;
+      });
+      container.appendChild(template);
+    }
+
+    const tareasBtn = document.createElement("button")
+    tareasBtn.type = "button"
+    tareasBtn.innerText = "+ Agregar Tarea"
+    tareasBtn.className = "btn btn-secondary mt-2"
+    document.getElementById("tareas-container").insertAdjacentElement("afterend", tareasBtn)
+    tareasBtn.addEventListener("click", () => cloneTemplate("tareas-container"))
+
+    const tiemposBtn = document.createElement("button")
+    tiemposBtn.type = "button"
+    tiemposBtn.innerText = "+ Agregar Tiempo Muerto"
+    tiemposBtn.className = "btn btn-secondary mt-2"
+    document.getElementById("tiempos-container").insertAdjacentElement("afterend", tiemposBtn)
+    tiemposBtn.addEventListener("click", () => cloneTemplate("tiempos-container"))
+  })
+</script>

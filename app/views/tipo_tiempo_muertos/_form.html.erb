@@ -1,0 +1,21 @@
+<%= form_with(model: tipo_tiempo_muerto, local: true, class: "mt-4") do |form| %>
+  <% if tipo_tiempo_muerto.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(tipo_tiempo_muerto.errors.count, "error") %> impidieron guardar el tipo:</h5>
+      <ul>
+        <% tipo_tiempo_muerto.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :nombre, class: "form-label" %>
+    <%= form.text_field :nombre, class: "form-control", placeholder: "Ej. Falta de material" %>
+  </div>
+
+  <div class="text-end">
+    <%= form.submit tipo_tiempo_muerto.new_record? ? "Crear Tipo" : "Actualizar", class: "btn btn-primary" %>
+  </div>
+<% end %>

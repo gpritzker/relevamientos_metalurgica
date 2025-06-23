@@ -1,0 +1,22 @@
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<div class="card mt-4 shadow-sm">
+  <div class="card-header bg-dark text-white">
+    <h2 class="mb-0">Detalle de Categoría</h2>
+  </div>
+
+  <div class="card-body">
+    <p><strong>Nombre:</strong> <%= @categorium.nombre %></p>
+    <p><strong>Descripción:</strong> <%= @categorium.descripcion %></p>
+  </div>
+
+  <div class="card-footer text-end">
+    <%= link_to "Editar", edit_categorium_path(@categorium), class: "btn btn-warning me-2" %>
+    <%= link_to "Volver al listado", categoria_path, class: "btn btn-secondary me-2" %>
+    <%= button_to "Eliminar", @categorium, method: :delete,
+                  data: { confirm: "¿Estás seguro de eliminar esta categoría?" },
+                  class: "btn btn-danger" %>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Tiempos Muertos</h1>
+  <%= link_to 'Nuevo Tiempo Muerto', new_tiempo_muerto_path, class: "btn btn-success" %>
+</div>
+
+<% if @tiempos_muertos.any? %>
+  <table class="table table-bordered table-striped">
+    <thead class="table-light">
+      <tr>
+        <th>Tipo</th>
+        <th>Descripción</th>
+        <th>Duración</th>
+        <th class="text-end">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tiempos_muertos.each do |tiempo| %>
+        <tr>
+          <td><%= tiempo.tipo_tiempo_muerto&.nombre || "-" %></td>
+          <td><%= tiempo.descripcion.presence || "-" %></td>
+          <td><%= tiempo.duracion_minutos %> min</td>
+          <td class="text-end">
+            <%= link_to 'Ver', tiempo_muerto_path(tiempo), class: "btn btn-info btn-sm me-1" %>
+            <%= link_to 'Editar', edit_tiempo_muerto_path(tiempo), class: "btn btn-warning btn-sm me-1" %>
+            <%= link_to 'Eliminar', tiempo_muerto_path(tiempo),
+                        method: :delete,
+                        data: { confirm: '¿Estás seguro?' },
+                        class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-secondary text-center">
+    No hay tiempos muertos registrados.
+  </div>
+<% end %>
+
+<div class="mt-4">
+  <% if usuario_signed_in? %>
+    <%= link_to 'Volver al inicio', root_path, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to 'Iniciar sesión', new_usuario_session_path, class: "btn btn-primary" %>
+  <% end %>
+</div>

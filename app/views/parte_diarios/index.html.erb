@@ -1,0 +1,38 @@
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Partes Diarios</h1>
+  <%= link_to 'Nuevo Parte Diario', new_parte_diario_path, class: "btn btn-success" %>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-light">
+    <tr>
+      <th>Fecha</th>
+      <th>Sector</th>
+      <th>Turno</th>
+      <th>Operario</th>
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @parte_diarios.each do |parte| %>
+      <tr>
+        <td><%= parte.fecha ? parte.fecha.strftime('%d/%m/%Y') : 'Sin fecha' %></td>
+        <td><%= parte.sector&.nombre || "-" %></td>
+        <td><%= parte.turno || "-" %></td>
+        <td><%= parte.operario&.nombre || "-" %></td>
+        <td class="text-end">
+          <%= link_to 'Ver', parte_diario_path(parte), class: "btn btn-info btn-sm me-1" %>
+          <%= link_to 'Editar', edit_parte_diario_path(parte), class: "btn btn-warning btn-sm me-1" %>
+          <%= link_to 'Eliminar', parte_diario_path(parte),
+                      method: :delete,
+                      data: { confirm: '¿Estás seguro?' },
+                      class: "btn btn-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

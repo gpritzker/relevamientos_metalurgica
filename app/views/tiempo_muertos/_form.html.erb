@@ -1,0 +1,42 @@
+<%= form_with(model: tiempo_muerto, local: true, class: "mt-4") do |form| %>
+  <% if tiempo_muerto.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(tiempo_muerto.errors.count, "error") %> impidieron guardar el tiempo muerto:</h5>
+      <ul>
+        <% tiempo_muerto.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :parte_diario_id, "Parte Diario", class: "form-label" %>
+    <%= form.number_field :parte_diario_id, class: "form-control", placeholder: "ID del parte diario" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :tipo_tiempo_muerto_id, "Tipo de Tiempo Muerto", class: "form-label" %>
+    <%= form.collection_select :tipo_tiempo_muerto_id, TipoTiempoMuerto.all, :id, :nombre, { prompt: "Seleccione un tipo" }, class: "form-select" %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :hora_inicio, class: "form-label" %>
+      <%= form.datetime_field :hora_inicio, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :hora_fin, class: "form-label" %>
+      <%= form.datetime_field :hora_fin, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :observaciones, class: "form-label" %>
+    <%= form.text_area :observaciones, rows: 3, class: "form-control", placeholder: "Observaciones adicionales" %>
+  </div>
+
+  <div class="text-end">
+    <%= form.submit tiempo_muerto.new_record? ? "Crear Tiempo Muerto" : "Actualizar", class: "btn btn-primary" %>
+  </div>
+<% end %>

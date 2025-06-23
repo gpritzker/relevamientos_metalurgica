@@ -1,0 +1,11 @@
+<h2>Tiempos muertos</h2>
+<ul>
+  <% @parte_diario.tiempos_muertos.each do |tiempo| %>
+    <li>
+      <strong><%= tiempo.tipo_tiempo_muerto.nombre %></strong> - De <%= tiempo.hora_inicio.strftime('%H:%M') %> a <%= tiempo.hora_fin.strftime('%H:%M') %>
+      (<%= link_to 'Ver', tiempo_muerto_path(tiempo) %> |
+       <%= link_to 'Editar', edit_tiempo_muerto_path(tiempo) %>)
+    </li>
+  <% end %>
+</ul>
+<%= link_to 'Nuevo Tiempo Muerto', new_tiempo_muerto_path(parte_diario_id: @parte_diario.id) %>

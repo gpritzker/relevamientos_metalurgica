@@ -1,0 +1,21 @@
+<%= form_with(model: empresa, local: true) do |form| %>
+  <% if empresa.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(empresa.errors.count, "error") %> impidieron guardar la empresa:</h5>
+      <ul>
+        <% empresa.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :nombre, class: "form-label" %>
+    <%= form.text_field :nombre, class: "form-control", placeholder: "Ej. OBEON S.A." %>
+  </div>
+
+  <div class="text-end">
+    <%= form.submit empresa.new_record? ? "Crear Empresa" : "Actualizar Empresa", class: "btn btn-primary" %>
+  </div>
+<% end %>
