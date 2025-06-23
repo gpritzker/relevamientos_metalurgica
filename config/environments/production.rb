@@ -29,7 +29,8 @@ Rails.application.configure do
   # Do not fall back to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
-    config.hosts << "43x46frl-3000.brs.devtunnels.ms"
+    #config.hosts << "43x46frl-3000.brs.devtunnels.ms"
+    config.hosts << "relevamientos-metalurgica.onrender.com"
 
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
