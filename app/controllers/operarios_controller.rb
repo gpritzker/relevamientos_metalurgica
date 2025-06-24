@@ -3,7 +3,7 @@ class OperariosController < ApplicationController
 
   # GET /operarios or /operarios.json
   def index
-    @operarios = Operario.all
+    @operarios = Operario.order(:nombre).page(params[:page]).per(10)
   end
 
   # GET /operarios/1 or /operarios/1.json

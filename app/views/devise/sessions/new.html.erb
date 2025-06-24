@@ -1,52 +1,55 @@
-<% provide(:title, 'Iniciar sesión') %>
-<div style="max-width: 400px; margin: 40px auto; padding: 30px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05); font-family: sans-serif;">
-  <h2 style="text-align: center; margin-bottom: 20px;">Iniciar sesión</h2>
-
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div style="margin-bottom: 15px;">
-      <%= f.label :email, 'Correo electrónico' %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", style: "width: 100%; padding: 8px;" %>
+<div class="login-wrapper d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow border-0 px-4 py-4" style="width: 100%; max-width: 400px;">
+    <div class="text-center mb-4">
+      <i class="bi bi-person-circle" style="font-size: 3rem; color: #0d6efd;"></i>
+      <h2 class="mt-2">Iniciar sesión</h2>
     </div>
 
-    <div style="margin-bottom: 15px;">
-      <%= f.label :password, 'Contraseña' %><br />
-      <div style="position: relative;">
-        <%= f.password_field :password, id: "password-field", autocomplete: "current-password", style: "width: 100%; padding: 8px; padding-right: 35px;" %>
-        <button type="button" id="toggle-password" style="position: absolute; top: 50%; right: 8px; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; font-size: 16px;">👁</button>
+    <%= form_with(scope: :usuario, url: session_path(:usuario), local: true, class: "needs-validation") do |form| %>
+      <div class="mb-3">
+        <%= form.label :email, 'Correo electrónico', class: 'form-label' %>
+        <%= form.email_field :email, autofocus: true, class: "form-control", required: true %>
       </div>
-    </div>
 
-    <% if devise_mapping.rememberable? -%>
-      <div style="margin-bottom: 15px;">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me, 'Recordarme' %>
+      <div class="mb-3">
+        <%= form.label :password, 'Contraseña', class: 'form-label' %>
+        <div class="input-group">
+          <%= form.password_field :password, autocomplete: "current-password", class: "form-control", required: true, id: "password-field" %>
+          <span class="input-group-text" id="toggle-password" style="cursor: pointer;">
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
       </div>
-    <% end -%>
 
-    <div>
-      <%= f.submit "Iniciar sesión", style: "width: 100%; background-color: #0069d9; color: white; padding: 10px; border: none; border-radius: 5px;" %>
+      <div class="form-check mb-3">
+        <%= form.check_box :remember_me, class: "form-check-input", id: "remember_me" %>
+        <%= form.label :remember_me, 'Recordarme', class: "form-check-label" %>
+      </div>
+
+      <div class="d-grid mb-2">
+        <%= form.submit "Iniciar sesión", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="text-center">
+      <%= link_to "¿Olvidaste tu contraseña?", new_usuario_password_path, class: "text-decoration-none small" %><br>
+      <%= link_to "Registrarme", new_usuario_registration_path, class: "text-decoration-none small" %>
     </div>
-  <% end %>
-
-  <hr style="margin: 20px 0;">
-
-  <div style="text-align: center;">
-    <%= link_to "Registrarme", new_registration_path(resource_name), style: "margin-right: 10px;" %>
-    <%= link_to "¿Olvidaste tu contraseña?", new_password_path(resource_name) %>
   </div>
 </div>
 
-<%# Agregamos el script inline para el "ojito" %>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const toggleBtn = document.getElementById("toggle-password");
-    const passwordInput = document.getElementById("password-field");
+    const toggle = document.getElementById("toggle-password");
+    const password = document.getElementById("password-field");
 
-    if (toggleBtn && passwordInput) {
-      toggleBtn.addEventListener("click", function () {
-        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-        passwordInput.setAttribute("type", type);
-        toggleBtn.textContent = type === "password" ? "👁" : "🙈";
+    if (toggle && password) {
+      toggle.addEventListener("click", function () {
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        toggle.innerHTML = type === "password"
+          ? '<i class="bi bi-eye"></i>'
+          : '<i class="bi bi-eye-slash"></i>';
       });
     }
   });
