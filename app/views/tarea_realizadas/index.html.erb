@@ -7,7 +7,7 @@
   <%= link_to 'Nueva Tarea Realizada', new_tarea_realizada_path, class: "btn btn-success" %>
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered align-middle">
   <thead class="table-light">
     <tr>
       <th>Descripción</th>
@@ -22,13 +22,32 @@
         <td><%= tarea.descripcion %></td>
         <td><%= tarea.cantidad_ejecutada %></td>
         <td><%= tarea.unidad %></td>
-        <td class="text-end">
-          <%= link_to 'Ver', tarea_realizada_path(tarea), class: "btn btn-info btn-sm me-1" %>
-          <%= link_to 'Editar', edit_tarea_realizada_path(tarea), class: "btn btn-warning btn-sm me-1" %>
-          <%= link_to 'Eliminar', tarea_realizada_path(tarea), method: :delete,
-                data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger btn-sm" %>
+        <td class="text-end" style="white-space: nowrap;">
+          <span class="d-inline-block">
+            <%= link_to tarea_realizada_path(tarea), class: "btn btn-info btn-sm", title: "Ver" do %>
+              <i class="bi bi-eye"></i>
+            <% end %>
+          </span>
+          <span class="d-inline-block">
+            <%= link_to edit_tarea_realizada_path(tarea), class: "btn btn-warning btn-sm", title: "Editar" do %>
+              <i class="bi bi-pencil"></i>
+            <% end %>
+          </span>
+          <span class="d-inline-block">
+            <%= button_to tarea_realizada_path(tarea),
+                          method: :delete,
+                          data: { confirm: '¿Estás seguro?' },
+                          class: "btn btn-danger btn-sm",
+                          title: "Eliminar" do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<div class="d-flex justify-content-center mt-3">
+  <%= paginate @tareas_realizadas %>
+</div>

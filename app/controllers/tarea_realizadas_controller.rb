@@ -5,6 +5,7 @@ class TareaRealizadasController < ApplicationController
   # GET /tarea_realizadas or /tarea_realizadas.json
   def index
     @tareas_realizadas = TareaRealizada.all
+    @tareas_realizadas = @tareas_realizadas.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   # GET /tarea_realizadas/1 or /tarea_realizadas/1.json

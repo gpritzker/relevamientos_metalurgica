@@ -7,7 +7,7 @@
   <%= link_to "Nueva Empresa", new_empresa_path, class: "btn btn-success" %>
 </div>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped align-middle">
   <thead class="table-light">
     <tr>
       <th>Nombre</th>
@@ -19,11 +19,27 @@
       <tr>
         <td><%= empresa.nombre %></td>
         <td class="text-end">
-          <%= link_to "Ver", empresa_path(empresa), class: "btn btn-info btn-sm me-1" %>
-          <%= link_to "Editar", edit_empresa_path(empresa), class: "btn btn-warning btn-sm me-1" %>
-          <%= link_to "Eliminar", empresa_path(empresa), method: :delete, data: { confirm: "¿Estás seguro de eliminar esta empresa?" }, class: "btn btn-danger btn-sm" %>
+          <div class="d-inline-flex gap-1">
+            <%= link_to empresa_path(empresa), class: "btn btn-info btn-sm", title: "Ver" do %>
+              <i class="bi bi-eye"></i>
+            <% end %>
+
+            <%= link_to edit_empresa_path(empresa), class: "btn btn-warning btn-sm", title: "Editar" do %>
+              <i class="bi bi-pencil"></i>
+            <% end %>
+
+            <%= link_to empresa_path(empresa), method: :delete,
+                          data: { confirm: "¿Estás seguro de eliminar esta empresa?" },
+                          class: "btn btn-danger btn-sm", title: "Eliminar" do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          </div>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<div class="d-flex justify-content-center mt-3">
+  <%= paginate @empresas %>
+</div>

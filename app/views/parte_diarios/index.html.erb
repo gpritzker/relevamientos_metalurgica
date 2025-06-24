@@ -7,7 +7,7 @@
   <%= link_to 'Nuevo Parte Diario', new_parte_diario_path, class: "btn btn-success" %>
 </div>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped align-middle">
   <thead class="table-light">
     <tr>
       <th>Fecha</th>
@@ -24,15 +24,32 @@
         <td><%= parte.sector&.nombre || "-" %></td>
         <td><%= parte.turno || "-" %></td>
         <td><%= parte.operario&.nombre || "-" %></td>
-        <td class="text-end">
-          <%= link_to 'Ver', parte_diario_path(parte), class: "btn btn-info btn-sm me-1" %>
-          <%= link_to 'Editar', edit_parte_diario_path(parte), class: "btn btn-warning btn-sm me-1" %>
-          <%= link_to 'Eliminar', parte_diario_path(parte),
-                      method: :delete,
-                      data: { confirm: '¿Estás seguro?' },
-                      class: "btn btn-danger btn-sm" %>
+        <td class="text-end" style="white-space: nowrap;">
+          <span class="d-inline-block">
+            <%= link_to parte_diario_path(parte), class: "btn btn-info btn-sm", title: "Ver" do %>
+              <i class="bi bi-eye"></i>
+            <% end %>
+          </span>
+          <span class="d-inline-block">
+            <%= link_to edit_parte_diario_path(parte), class: "btn btn-warning btn-sm", title: "Editar" do %>
+              <i class="bi bi-pencil"></i>
+            <% end %>
+          </span>
+          <span class="d-inline-block">
+            <%= button_to parte_diario_path(parte),
+                          method: :delete,
+                          data: { confirm: '¿Estás seguro?' },
+                          class: "btn btn-danger btn-sm",
+                          title: "Eliminar" do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<div class="d-flex justify-content-center mt-3">
+  <%= paginate @parte_diarios %>
+</div>

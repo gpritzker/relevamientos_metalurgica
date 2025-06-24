@@ -4,7 +4,7 @@ class ParteDiariosController < ApplicationController
 
   # GET /parte_diarios or /parte_diarios.json
   def index
-    @parte_diarios = ParteDiario.all
+    @parte_diarios = ParteDiario.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   # GET /parte_diarios/1 or /parte_diarios/1.json
@@ -57,7 +57,7 @@ class ParteDiariosController < ApplicationController
     @parte_diario.destroy!
 
     respond_to do |format|
-      format.html { redirect_to parte_diarios_path, status: :see_other, notice: "Parte diario was successfully destroyed." }
+      format.html { redirect_to parte_diarios_path, notice: "Parte diario eliminado exitosamente." }
       format.json { head :no_content }
     end
   end

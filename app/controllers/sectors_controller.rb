@@ -3,7 +3,7 @@ class SectorsController < ApplicationController
 
   # GET /sectors or /sectors.json
   def index
-    @sectors = Sector.all
+    @sectors = Sector.order(:nombre).page(params[:page]).per(10)
   end
 
   # GET /sectors/1 or /sectors/1.json

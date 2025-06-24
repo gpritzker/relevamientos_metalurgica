@@ -4,7 +4,7 @@ class TipoTiempoMuertosController < ApplicationController
 
   # GET /tipo_tiempo_muertos or /tipo_tiempo_muertos.json
   def index
-    @tipo_tiempo_muertos = TipoTiempoMuerto.all
+    @tipo_tiempo_muertos = TipoTiempoMuerto.order(:nombre).page(params[:page]).per(10)
   end
 
   # GET /tipo_tiempo_muertos/1 or /tipo_tiempo_muertos/1.json

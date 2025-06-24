@@ -3,7 +3,7 @@ class EmpresasController < ApplicationController
   before_action :set_empresa, only: %i[show edit update destroy]
 
   def index
-    @empresas = Empresa.all
+      @empresas = Empresa.order(:nombre).page(params[:page]).per(10)
   end
 
   def show; end
