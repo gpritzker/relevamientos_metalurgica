@@ -86,11 +86,3 @@ production:
   adapter: postgresql
   url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-render_production:
-  <<: *default
-  database: relevamientos_metalurgica_production
-  username: relevamientos_metalurgica_production_user
-  password: m7ScAovcNFBWey7PhEaKZFo3hdcui6Pi
-  host: dpg-d1crleqdbo4c73anhh1g-a.oregon-postgres.render.com
-  port: 5432
