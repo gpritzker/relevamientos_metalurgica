@@ -31,6 +31,8 @@
 
 /public/assets
 /config/database.yml
+/config/credentials.yml.enc
+/config/database.yml.example
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

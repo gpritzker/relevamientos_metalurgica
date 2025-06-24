@@ -1,6 +1,3 @@
-<% if notice %>
-  <div class="alert alert-success"><%= notice %></div>
-<% end %>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
   <h1 class="mb-0">Empresas</h1>
@@ -18,22 +15,27 @@
     <% @empresas.each do |empresa| %>
       <tr>
         <td><%= empresa.nombre %></td>
-        <td class="text-end">
-          <div class="d-inline-flex gap-1">
+        <td class="text-end" style="white-space: nowrap;">
+          <span class="d-inline-block">
             <%= link_to empresa_path(empresa), class: "btn btn-info btn-sm", title: "Ver" do %>
               <i class="bi bi-eye"></i>
             <% end %>
-
+          </span>
+          <span class="d-inline-block">
             <%= link_to edit_empresa_path(empresa), class: "btn btn-warning btn-sm", title: "Editar" do %>
               <i class="bi bi-pencil"></i>
             <% end %>
-
-            <%= link_to empresa_path(empresa), method: :delete,
-                          data: { confirm: "¿Estás seguro de eliminar esta empresa?" },
-                          class: "btn btn-danger btn-sm", title: "Eliminar" do %>
+          </span>
+          <span class="d-inline-block">
+            <%= button_to empresa_path(empresa),
+                          method: :delete,
+                          data: { confirm: '¿Estás seguro de eliminar esta empresa?' },
+                          class: "btn btn-danger btn-sm",
+                          title: "Eliminar",
+                          form: { class: "d-inline" } do %>
               <i class="bi bi-trash"></i>
             <% end %>
-          </div>
+          </span>
         </td>
       </tr>
     <% end %>

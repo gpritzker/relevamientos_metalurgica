@@ -1,0 +1,16 @@
+<% if @empresa.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Errores:</h4>
+    <ul>
+      <% @empresa.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h1>Editar Empresa</h1>
+
+<%= render 'form', empresa: @empresa %>
+
+<%= link_to 'Volver', empresas_path, class: "btn btn-secondary mt-2" %>
