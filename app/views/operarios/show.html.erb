@@ -11,6 +11,8 @@
     <p><strong>Nombre:</strong> <%= @operario.nombre %></p>
     <p><strong>Legajo:</strong> <%= @operario.legajo %></p>
     <p><strong>Sector:</strong> <%= @operario.sector %></p>
+    <p><strong>Empresa:</strong> <%= @operario.empresa&.nombre %></p>
+    <p><strong>Categoría:</strong> <%= @operario.categoria&.nombre %></p>
     <p><strong>Activo:</strong> <%= @operario.activo? ? "✅ Sí" : "❌ No" %></p>
   </div>
 

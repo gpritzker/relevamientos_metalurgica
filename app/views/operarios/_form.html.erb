@@ -68,7 +68,7 @@
 
     <div class="col-md-6 mb-3">
       <%= form.label :categoria, class: "form-label" %>
-      <%= form.collection_select :empresa_id, Categorium.all, :id, :nombre, { include_blank: "Seleccionar" }, { class: "form-select" } %>
+      <%= form.collection_select :categoria_id, Categorium.all, :id, :nombre, { include_blank: "Seleccionar" }, { class: "form-select" } %>
     </div>
 
     <div class="col-md-3 form-check mb-3">
