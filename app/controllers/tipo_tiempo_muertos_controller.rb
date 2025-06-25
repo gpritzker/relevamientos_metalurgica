@@ -39,7 +39,7 @@ class TipoTiempoMuertosController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_tiempo_muerto.update(tipo_tiempo_muerto_params)
-        format.html { redirect_to @tipo_tiempo_muerto, notice: "Tipo tiempo muerto was successfully updated." }
+        format.html { redirect_to @tipo_tiempo_muerto, notice: "Tipo tiempo muerto editado correctamente." }
         format.json { render :show, status: :ok, location: @tipo_tiempo_muerto }
       else
         format.html { render :edit, status: :unprocessable_entity }

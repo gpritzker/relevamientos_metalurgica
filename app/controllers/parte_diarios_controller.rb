@@ -43,7 +43,7 @@ class ParteDiariosController < ApplicationController
   def update
     respond_to do |format|
       if @parte_diario.update(parte_diario_params)
-        format.html { redirect_to @parte_diario, notice: "Parte diario was successfully updated." }
+        format.html { redirect_to @parte_diario, notice: "Parte diario editado correctamente" }
         format.json { render :show, status: :ok, location: @parte_diario }
       else
         format.html { render :edit, status: :unprocessable_entity }

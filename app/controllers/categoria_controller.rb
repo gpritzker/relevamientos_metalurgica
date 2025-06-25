@@ -38,7 +38,7 @@ class CategoriaController < ApplicationController
   def update
     respond_to do |format|
       if @categorium.update(categorium_params)
-        format.html { redirect_to @categorium, notice: "Categorium was successfully updated." }
+        format.html { redirect_to @categorium, notice: "Categoria editado correctamente." }
         format.json { render :show, status: :ok, location: @categorium }
       else
         format.html { render :edit, status: :unprocessable_entity }

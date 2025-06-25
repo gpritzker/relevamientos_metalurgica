@@ -27,7 +27,7 @@ class TareaRealizadasController < ApplicationController
 
     respond_to do |format|
       if @tarea_realizada.save
-        format.html { redirect_to @tarea_realizada, notice: "Tarea realizada was successfully created." }
+        format.html { redirect_to @tarea_realizada, notice: "Tarea realizada editada correctamente." }
         format.json { render :show, status: :created, location: @tarea_realizada }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class TareaRealizadasController < ApplicationController
   def update
     respond_to do |format|
       if @tarea_realizada.update(tarea_realizada_params)
-        format.html { redirect_to @tarea_realizada, notice: "Tarea realizada was successfully updated." }
+        format.html { redirect_to @tarea_realizada, notice: "Tarea realizada editada correctamente." }
         format.json { render :show, status: :ok, location: @tarea_realizada }
       else
         format.html { render :edit, status: :unprocessable_entity }

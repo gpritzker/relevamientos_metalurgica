@@ -38,7 +38,7 @@ class OperariosController < ApplicationController
   def update
     respond_to do |format|
       if @operario.update(operario_params)
-        format.html { redirect_to @operario, notice: "Operario was successfully updated." }
+        format.html { redirect_to @operario, notice: "Operario editado correctamente." }
         format.json { render :show, status: :ok, location: @operario }
       else
         format.html { render :edit, status: :unprocessable_entity }
