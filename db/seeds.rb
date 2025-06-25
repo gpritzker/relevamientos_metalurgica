@@ -117,4 +117,91 @@ operarios_obeon.each do |attrs|
   end
 end
 
+
+patagonia = Empresa.find_or_create_by!(nombre: "Patagonia")
+
+operarios_patagonia = [
+  {
+    nombre: "PIRES GUSTAVO ALFREDO",
+    legajo: 8,
+    fecha_nacimiento: Date.parse("1981-12-11"),
+    fecha_ingreso: Date.parse("2023-07-24"),
+    telefono: "2804971877",
+    domicilio: "Vachina 444",
+    ciudad: "Trelew",
+    categoria_id: Categorium.find_or_create_by!(nombre: "Oficial", descripcion: "").id,
+    sindicalizado: false,
+    residente: true
+  },
+  {
+    nombre: "TAMARGO ALFREDO E",
+    legajo: 22,
+    fecha_nacimiento: Date.parse("1966-05-11"),
+    fecha_ingreso: Date.parse("2023-10-27"),
+    telefono: "2804688341",
+    domicilio: "Malaspina 354",
+    ciudad: "Trelew",
+    categoria_id: Categorium.find_or_create_by!(nombre: "Oficial", descripcion: "").id,
+    sindicalizado: false,
+    residente: true
+  },
+  {
+    nombre: "CARDERON CLAUDIO IVAN",
+    legajo: 31,
+    fecha_nacimiento: Date.parse("1984-07-04"),
+    fecha_ingreso: Date.parse("2025-03-17"),
+    telefono: "2804711250",
+    domicilio: "Gales 762",
+    ciudad: "Trelew",
+    categoria_id: Categorium.find_or_create_by!(nombre: "Oficial", descripcion: "").id,
+    sindicalizado: false,
+    residente: true
+  },
+  {
+    nombre: "ARANDA BRAIAN",
+    legajo: 32,
+    fecha_nacimiento: Date.parse("1996-03-25"),
+    fecha_ingreso: Date.parse("2025-03-19"),
+    telefono: "2944141226",
+    domicilio: "Almirante Brown C 1",
+    ciudad: "Rawson",
+    categoria_id: Categorium.find_or_create_by!(nombre: "Oficial", descripcion: "").id,
+    sindicalizado: false,
+    residente: true
+  },
+  {
+    nombre: "ALBIAL DAMIAN",
+    legajo: 33,
+    fecha_nacimiento: Date.parse("1985-09-14"),
+    fecha_ingreso: Date.parse("2025-03-19"),
+    telefono: "2804358006",
+    domicilio: "Gan Gan y Mamel B° las Banderitas",
+    ciudad: "Trelew",
+    categoria_id: Categorium.find_or_create_by!(nombre: "Oficial", descripcion: "").id,
+    sindicalizado: false,
+    residente: true
+  },
+  {
+    nombre: "AGUILAR V. Victor H.",
+    legajo: 34,
+    fecha_nacimiento: Date.parse("1991-09-27"),
+    fecha_ingreso: Date.parse("2025-03-22"),
+    telefono: "2804011711",
+    domicilio: "Luis Gonzalez 93 B°490 Norte",
+    ciudad: "Rawson",
+    categoria_id: Categorium.find_or_create_by!(nombre: "Oficial", descripcion: "").id,
+    sindicalizado: false,
+    residente: true
+  }
+]
+
+operarios_patagonia.each do |attrs|
+  Operario.find_or_create_by!(legajo: attrs[:legajo]) do |operario|
+    operario.assign_attributes(attrs.merge(empresa_id: patagonia.id, activo: true))
+  end
+end
+
+puts "✔ Operarios de Patagonia creados: #{operarios_patagonia.size}"
+
+
 puts "🌱 Seeding completo."

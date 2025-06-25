@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_23_135619) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_25_171922) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_23_135619) do
     t.string "categoria"
     t.boolean "sindicalizado", default: false
     t.boolean "residente", default: false
+    t.bigint "categoria_id"
+    t.index ["categoria_id"], name: "index_operarios_on_categoria_id"
     t.index ["empresa_id"], name: "index_operarios_on_empresa_id"
   end
 
@@ -126,6 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_23_135619) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "operarios", "categoria", column: "categoria_id"
   add_foreign_key "operarios", "empresas"
   add_foreign_key "parte_diarios", "operarios"
   add_foreign_key "parte_diarios", "sectors"

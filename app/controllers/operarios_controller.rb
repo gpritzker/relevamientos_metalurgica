@@ -64,7 +64,25 @@ class OperariosController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def operario_params
-      params.require(:operario).permit(:nombre, :legajo, :sector, :activo)
+   def operario_params
+      params.require(:operario).permit(
+        :nombre,
+        :legajo,
+        :sector,
+        :activo,
+        :fecha_nacimiento,
+        :fecha_ingreso,
+        :obra_social,
+        :cuil,
+        :cbu,
+        :domicilio,
+        :telefono,
+        :ciudad,
+        :sindicalizado,
+        :residente,
+        :empresa_id,
+        :categoria_id
+      )
     end
+
 end
