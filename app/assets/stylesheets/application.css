@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+.pagination a,
+.pagination span {
+  margin: 0 8px;  /* espacio horizontal entre los elementos */
+  font-weight: bold;
+  text-decoration: none;
+}
