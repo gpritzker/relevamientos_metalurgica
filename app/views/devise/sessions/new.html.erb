@@ -1,56 +1,53 @@
-<div class="login-wrapper d-flex justify-content-center align-items-center vh-100 bg-light">
-  <div class="card shadow border-0 px-4 py-4" style="width: 100%; max-width: 400px;">
-    <div class="text-center mb-4">
-      <i class="bi bi-person-circle" style="font-size: 3rem; color: #0d6efd;"></i>
-      <h2 class="mt-2">Iniciar sesión</h2>
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-form-section">
+      <h2>Iniciar sesión</h2>
+
+      <%= form_with(scope: :usuario, url: session_path(:usuario), local: true, class: "login-form") do |f| %>
+        <div class="form-group">
+          <%= f.label :email, "Correo electrónico" %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, "Contraseña" %>
+          <div class="input-group">
+            <%= f.password_field :password, class: "form-control", id: "password-field" %>
+            <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword()" aria-label="Mostrar/Ocultar contraseña">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+          </div>
+        </div>
+
+        <div class="form-check mb-3">
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, "Recordarme", class: "form-check-label" %>
+        </div>
+
+        <%= f.submit "Iniciar sesión", class: "btn btn-primary w-100" %>
+
+        <div class="text-center mt-3">
+          <%= link_to "¿Olvidaste tu contraseña?", new_usuario_password_path %><br>
+          <%= link_to "Registrarme", new_usuario_registration_path %>
+        </div>
+      <% end %>
     </div>
 
-    <%= form_with(scope: :usuario, url: session_path(:usuario), local: true, class: "needs-validation") do |form| %>
-      <div class="mb-3">
-        <%= form.label :email, 'Correo electrónico', class: 'form-label' %>
-        <%= form.email_field :email, autofocus: true, class: "form-control", required: true %>
-      </div>
-
-      <div class="mb-3">
-        <%= form.label :password, 'Contraseña', class: 'form-label' %>
-        <div class="input-group">
-          <%= form.password_field :password, autocomplete: "current-password", class: "form-control", required: true, id: "password-field" %>
-          <span class="input-group-text" id="toggle-password" style="cursor: pointer;">
-            <i class="bi bi-eye"></i>
-          </span>
-        </div>
-      </div>
-
-      <div class="form-check mb-3">
-        <%= form.check_box :remember_me, class: "form-check-input", id: "remember_me" %>
-        <%= form.label :remember_me, 'Recordarme', class: "form-check-label" %>
-      </div>
-
-      <div class="d-grid mb-2">
-        <%= form.submit "Iniciar sesión", class: "btn btn-primary" %>
-      </div>
-    <% end %>
-
-    <div class="text-center">
-      <%= link_to "¿Olvidaste tu contraseña?", new_usuario_password_path, class: "text-decoration-none small" %><br>
-      <%= link_to "Registrarme", new_usuario_registration_path, class: "text-decoration-none small" %>
+    <div class="login-image-section">
+      <%= image_tag "obeon_logo.png", alt: "Obeon Logo" %>
     </div>
   </div>
 </div>
+ <footer class="login-footer">
+    © <%= Time.current.year %> Obeon. Todos los derechos reservados.
+  </footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggle = document.getElementById("toggle-password");
-    const password = document.getElementById("password-field");
-
-    if (toggle && password) {
-      toggle.addEventListener("click", function () {
-        const type = password.getAttribute("type") === "password" ? "text" : "password";
-        password.setAttribute("type", type);
-        toggle.innerHTML = type === "password"
-          ? '<i class="bi bi-eye"></i>'
-          : '<i class="bi bi-eye-slash"></i>';
-      });
-    }
-  });
+  function togglePassword() {
+    const field = document.getElementById("password-field");
+    field.type = field.type === "password" ? "text" : "password";
+  }
 </script>
