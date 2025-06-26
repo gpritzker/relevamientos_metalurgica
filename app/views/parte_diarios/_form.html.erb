@@ -85,10 +85,11 @@
   <h4>Tiempos Muertos</h4>
   <div id="tiempos-container">
     <%= form.fields_for :tiempos_muertos do |tiempo_form| %>
-      <div class="border p-3 mb-3 rounded">
-        <div class="mb-2">
-          <%= tiempo_form.label :tipo_tiempo_muerto_id, "Tipo", class: "form-label" %>
-          <%= tiempo_form.collection_select :tipo_tiempo_muerto_id, TipoTiempoMuerto.all, :id, :nombre, prompt: "Seleccione un tipo", class: "form-select" %>
+      <div class="mb-3">
+        <label class="form-label">⏱️ Tipo</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-hourglass-split"></i></span>
+          <%= tiempo_form.collection_select :tipo_tiempo_muerto_id, TipoTiempoMuerto.all, :id, :nombre, { prompt: 'Seleccione un tipo' }, { class: "form-select" } %>
         </div>
 
         <div class="mb-2">

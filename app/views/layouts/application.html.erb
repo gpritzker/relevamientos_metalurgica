@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
 
-  <body class="d-flex flex-column">
+  <body class="d-flex flex-column min-vh-100">
 
     <!-- Botón hamburguesa solo visible en mobile -->
     <nav class="navbar navbar-dark bg-dark d-md-none">
@@ -28,7 +28,7 @@
 
     <div class="d-flex flex-grow-1">
       <!-- Sidebar offcanvas para mobile y visible en desktop -->
-      <div class="offcanvas-md offcanvas-start bg-dark text-white vh-100" tabindex="-1" id="sidebar">
+      <div class="offcanvas-md offcanvas-start bg-dark text-white" style="min-height: 100vh;" tabindex="-1" id="sidebar">
         <div class="offcanvas-header d-md-none">
           <h5 class="offcanvas-title">Menú</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
@@ -60,7 +60,7 @@
       </div>
 
       <!-- Main content -->
-      <main class="flex-grow-1 p-4">
+      <main class="flex-grow-1 p-4 overflow-auto">
         <% if notice %>
           <div class="alert alert-success d-flex align-items-center">
             <i class="bi bi-check-circle-fill me-2"></i> <%= notice %>
