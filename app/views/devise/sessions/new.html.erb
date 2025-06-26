@@ -1,53 +1,170 @@
-<div class="login-container">
-  <div class="login-card">
-    <div class="login-form-section">
-      <h2>Iniciar sesión</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Iniciar sesión - Obeon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <%= form_with(scope: :usuario, url: session_path(:usuario), local: true, class: "login-form") do |f| %>
-        <div class="form-group">
-          <%= f.label :email, "Correo electrónico" %>
-          <%= f.email_field :email, class: "form-control" %>
-        </div>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-        <div class="form-group">
-          <%= f.label :password, "Contraseña" %>
-          <div class="input-group">
-            <%= f.password_field :password, class: "form-control", id: "password-field" %>
-            <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword()" aria-label="Mostrar/Ocultar contraseña">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-          </button>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f8f9fa, #e3edf7);
+    }
+
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(to bottom, #f8f9fc, #ffffff);
+    }
+
+    .login-card {
+      display: flex;
+      width: 90%;
+      max-width: 960px;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      align-items: center;
+    }
+
+    .login-form-section {
+      flex: 1;
+      padding: 3rem;
+      background-color: #fff;
+    }
+
+    .login-form-section h2 {
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .login-image-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background-color: #fff;
+    }
+
+    .login-image-section img {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .login-footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+      background-color: #f1f1f1;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+      background-color: #0d6efd;
+      border: none;
+    }
+
+    .btn-outline-secondary {
+      border: 1px solid #ccc;
+      background-color: #fff;
+    }
+
+    .input-group {
+      display: flex;
+    }
+
+    .input-group .form-control {
+      flex: 1;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .input-group button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-form-section">
+        <h2>Iniciar sesión</h2>
+
+        <%= form_with(scope: :usuario, url: session_path(:usuario), local: true, class: "login-form") do |f| %>
+          <div class="form-group">
+            <%= f.label :email, "Correo electrónico" %>
+            <%= f.email_field :email, class: "form-control" %>
           </div>
-        </div>
 
-        <div class="form-check mb-3">
-          <%= f.check_box :remember_me, class: "form-check-input" %>
-          <%= f.label :remember_me, "Recordarme", class: "form-check-label" %>
-        </div>
+          <div class="form-group">
+            <%= f.label :password, "Contraseña" %>
+            <div class="input-group">
+              <%= f.password_field :password, class: "form-control", id: "password-field" %>
+              <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword()" aria-label="Mostrar/Ocultar contraseña">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+          </div>
 
-        <%= f.submit "Iniciar sesión", class: "btn btn-primary w-100" %>
+          <div class="form-check mb-3">
+            <%= f.check_box :remember_me, class: "form-check-input" %>
+            <%= f.label :remember_me, "Recordarme", class: "form-check-label" %>
+          </div>
 
-        <div class="text-center mt-3">
-          <%= link_to "¿Olvidaste tu contraseña?", new_usuario_password_path %><br>
-          <%= link_to "Registrarme", new_usuario_registration_path %>
-        </div>
-      <% end %>
-    </div>
+          <%= f.submit "Iniciar sesión", class: "btn btn-primary w-100" %>
 
-    <div class="login-image-section">
-      <%= image_tag "obeon_logo.png", alt: "Obeon Logo" %>
+          <div class="text-center mt-3">
+            <%= link_to "¿Olvidaste tu contraseña?", new_usuario_password_path %><br>
+            <%= link_to "Registrarme", new_usuario_registration_path %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="login-image-section">
+        <%= image_tag "obeon_logo.png", alt: "Obeon Logo" %>
+      </div>
     </div>
   </div>
-</div>
- <footer class="login-footer">
+
+  <footer class="login-footer">
     © <%= Time.current.year %> Obeon. Todos los derechos reservados.
   </footer>
 
-<script>
-  function togglePassword() {
-    const field = document.getElementById("password-field");
-    field.type = field.type === "password" ? "text" : "password";
-  }
-</script>
+  <script>
+    function togglePassword() {
+      const field = document.getElementById("password-field");
+      field.type = field.type === "password" ? "text" : "password";
+    }
+  </script>
+</body>
+</html>

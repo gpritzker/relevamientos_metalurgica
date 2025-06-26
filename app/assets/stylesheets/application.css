@@ -1,56 +1,40 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-.pagination a,
-.pagination span {
-  margin: 0 8px;  /* espacio horizontal entre los elementos */
-  font-weight: bold;
-  text-decoration: none;
+/* Reset básico para evitar problemas */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: linear-gradient(135deg, #f8f9fa, #e3edf7);
-}
-
-.login-container {
-  padding: 2rem;
-}
-
-.card {
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-.login-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa, #e3edf7);
+}
+
+/* Contenedor principal: toma todo el espacio disponible */
+.login-container {
+  flex: 1;
+  display: flex;
+  align-items: center;     /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  padding: 2rem;
   background: linear-gradient(to bottom, #f8f9fc, #ffffff);
 }
 
+/* Tarjeta que contiene formulario + logo */
 .login-card {
   display: flex;
-  flex: 1;
-  margin: auto;
   width: 90%;
   max-width: 960px;
   background-color: #fff;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  align-items: center;  /* 👈 Esto alinea verticalmente el formulario y el logo */
 }
 
+/* Sección del formulario */
 .login-form-section {
   flex: 1;
   padding: 3rem;
@@ -62,13 +46,14 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Sección del logo */
 .login-image-section {
   flex: 1;
-  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  background-color: #fff;
 }
 
 .login-image-section img {
@@ -78,19 +63,11 @@ body {
   object-fit: contain;
 }
 
+/* Footer */
 .login-footer {
   text-align: center;
   padding: 1rem;
   font-size: 0.9rem;
   color: #888;
   background-color: #f1f1f1;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.login-container {
-  flex: 1;
 }
