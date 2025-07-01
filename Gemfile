@@ -42,6 +42,10 @@ gem 'dotenv-rails'
 
 gem 'kaminari'
 
+gem 'chartkick'
+gem 'groupdate'
+gem 'chart-js-rails'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

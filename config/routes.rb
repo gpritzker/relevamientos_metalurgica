@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   devise_for :usuarios
   resources :empresas
   get 'dashboard', to: 'dashboards#index', as: 'dashboard'
+  get 'dashboard/fullscreen', to: 'dashboards#fullscreen', as: :dashboard_fullscreen
   root to: "home#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

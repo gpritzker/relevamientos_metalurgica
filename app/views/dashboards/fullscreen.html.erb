@@ -1,0 +1,136 @@
+<h1 class="mb-4">📊 Dashboard General (Pantalla Completa)</h1>
+
+<div class="row g-4 mb-4">
+  <%# Métricas principales %>
+  <%= render partial: 'shared/kpi_card', locals: { title: 'Operarios activos', value: @operarios_activos, style: 'primary' } %>
+  <%= render partial: 'shared/kpi_card', locals: { title: 'Partes de hoy', value: @partes_del_dia, style: 'success' } %>
+  <%= render partial: 'shared/kpi_card', locals: { title: 'Tiempos muertos hoy', value: @tiempos_muertos_hoy, style: 'warning' } %>
+  <%= render partial: 'shared/kpi_card', locals: { title: 'Alertas (>60 min)', value: @alertas, style: 'danger' } %>
+  <%= render partial: 'shared/kpi_card', locals: { title: 'Minutos muertos hoy', value: "#{@minutos_muertos_hoy} min", style: 'secondary' } %>
+  <%= render partial: 'shared/kpi_card', locals: { title: '% Partes con TM', value: "#{@porcentaje_con_tiempo_muerto}%", style: 'info' } %>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">📈 Productividad semanal (por fecha)</div>
+  <div class="card-body">
+    <%= line_chart @productividad_semanal, height: "300px", colors: ["#0d6efd"] %>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">⏱️ Minutos muertos por día</div>
+  <div class="card-body">
+    <%= column_chart @minutos_muertos_por_dia, height: "300px", colors: ["#dc3545"] %>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">📋 Últimos partes diarios</div>
+  <div class="card-body p-0">
+    <table class="table table-hover table-striped mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Fecha</th>
+          <th>Operario</th>
+          <th>Tareas</th>
+          <th>Tiempos Muertos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ultimos_partes.each do |parte| %>
+          <tr>
+            <td><%= parte.fecha.strftime("%d/%m/%Y") %></td>
+            <td><%= parte.operario&.nombre || "Sin asignar" %></td>
+            <td><%= parte.tareas_realizadas.count %></td>
+            <td><%= parte.tiempos_muertos.map(&:duracion_minutos).sum %> min</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">🏆 Top 3 Operarios (Tareas Hoy)</div>
+  <div class="card-body">
+    <ul class="list-group">
+      <% @top_operarios.each do |operario| %>
+        <li class="list-group-item d-flex justify-content-between">
+          <span><%= operario.nombre %></span>
+          <strong><%= operario.tareas_realizadas_count %> tareas</strong>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="card mt-5">
+  <div class="card-header">🧾 Explicación de indicadores (KPIs)</div>
+  <div class="card-body p-0">
+    <table class="table table-striped table-bordered mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Indicador</th>
+          <th>Variable</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>📊 Operarios activos</td>
+          <td><code>@operarios_activos</code></td>
+          <td>Cantidad total de operarios activos registrados en el sistema.</td>
+        </tr>
+        <tr>
+          <td>✅ Partes de hoy</td>
+          <td><code>@partes_del_dia</code></td>
+          <td>Cuántos partes diarios se cargaron en la fecha actual.</td>
+        </tr>
+        <tr>
+          <td>⏱️ Tiempos muertos hoy</td>
+          <td><code>@tiempos_muertos_hoy</code></td>
+          <td>Cuántos tiempos muertos se registraron hoy, sin importar la duración.</td>
+        </tr>
+        <tr>
+          <td>🔴 Alertas (&gt;60 min)</td>
+          <td><code>@alertas</code></td>
+          <td>Cantidad de tiempos muertos de hoy que duraron más de una hora.</td>
+        </tr>
+        <tr>
+          <td>⌛ Minutos muertos totales hoy</td>
+          <td><code>@minutos_muertos_hoy</code></td>
+          <td>Total de minutos perdidos hoy por tiempos muertos, sumando todos los operarios.</td>
+        </tr>
+        <tr>
+          <td>📉 % con tiempo muerto</td>
+          <td><code>@porcentaje_con_tiempo_muerto</code></td>
+          <td>Porcentaje de partes diarios de hoy que incluyen al menos un tiempo muerto.</td>
+        </tr>
+        <tr>
+          <td>🏆 Top 3 operarios</td>
+          <td><code>@top_operarios</code></td>
+          <td>Ranking de operarios que más tareas realizaron en el día de hoy.</td>
+        </tr>
+        <tr>
+          <td>📈 Productividad semanal</td>
+          <td><code>@productividad_semanal</code></td>
+          <td>Cantidad de partes diarios cargados por día en la última semana (gráfico de línea).</td>
+        </tr>
+        <tr>
+          <td>⏳ Minutos muertos por día</td>
+          <td><code>@minutos_muertos_por_dia</code></td>
+          <td>Gráfico de barras que muestra cuántos minutos muertos hubo por día en los últimos 7 días.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    console.log("turbo:load chartkick");
+    if (typeof Chartkick !== "undefined" && Chartkick.charts.length > 0) {
+      Chartkick.charts.forEach(chart => chart.refresh());
+    }
+  });
+</script>
