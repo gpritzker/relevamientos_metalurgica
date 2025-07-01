@@ -1,5 +1,6 @@
 class DashboardsController < ApplicationController
   layout 'fullscreen', only: [:fullscreen]
+  before_action :authenticate_usuario!
 
   def index
     @parte_diarios = ParteDiario.includes(:sector, :operario)
