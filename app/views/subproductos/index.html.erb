@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Subproductos</h1>
+
+<div id="subproductos">
+  <% @subproductos.each do |subproducto| %>
+    <%= render subproducto %>
+    <p>
+      <%= link_to "Show this subproducto", subproducto %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New subproducto", new_subproducto_path %>

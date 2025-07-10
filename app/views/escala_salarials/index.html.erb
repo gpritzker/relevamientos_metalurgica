@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Escala salarials</h1>
+
+<div id="escala_salarials">
+  <% @escala_salarials.each do |escala_salarial| %>
+    <%= render escala_salarial %>
+    <p>
+      <%= link_to "Show this escala salarial", escala_salarial %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New escala salarial", new_escala_salarial_path %>

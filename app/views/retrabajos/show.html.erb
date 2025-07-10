@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @retrabajo %>
+
+<div>
+  <%= link_to "Edit this retrabajo", edit_retrabajo_path(@retrabajo) %> |
+  <%= link_to "Back to retrabajos", retrabajos_path %>
+
+  <%= button_to "Destroy this retrabajo", @retrabajo, method: :delete %>
+</div>

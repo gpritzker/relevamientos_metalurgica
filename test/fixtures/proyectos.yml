@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  cliente: one
+  tipo_obra: one
+  ubicacion: MyString
+  plazo_contrato: MyString
+  documentacion: MyText
+
+two:
+  nombre: MyString
+  cliente: two
+  tipo_obra: two
+  ubicacion: MyString
+  plazo_contrato: MyString
+  documentacion: MyText

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tipo obras</h1>
+
+<div id="tipo_obras">
+  <% @tipo_obras.each do |tipo_obra| %>
+    <%= render tipo_obra %>
+    <p>
+      <%= link_to "Show this tipo obra", tipo_obra %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New tipo obra", new_tipo_obra_path %>

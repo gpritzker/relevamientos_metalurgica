@@ -29,14 +29,18 @@
           <%= tarea_form.text_field :descripcion, class: "form-control" %>
         </div>
 
-        <div class="mb-2">
+        <%
+=begin%>
+ <div class="mb-2">
           <%= tarea_form.label :cantidad_ejecutada, class: "form-label" %>
           <%= tarea_form.number_field :cantidad_ejecutada, class: "form-control" %>
         </div>
         <div class="mb-2">
           <%= tarea_form.label :nro_modulo, "Nro Módulo", class: "form-label" %>
           <%= tarea_form.text_field :nro_modulo, class: "form-control" %>
-        </div>
+        </div> 
+<%
+=end%>
 
         <div class="mb-2">
           <%= tarea_form.label :tarea_realizada, class: "form-label" %>
@@ -53,7 +57,9 @@
             <%= tarea_form.time_select :hora_fin, {ampm: true, minute_step: 1}, {class: "form-control d-inline w-auto me-2"} %>
           </div>
         </div>
-        <div class="row">
+        <%
+=begin%>
+ <div class="row">
           <div class="col-md-6">
             <%= tarea_form.label :en_proceso, class: "form-label d-block" %>
             <div class="form-check">
@@ -68,7 +74,9 @@
               <%= tarea_form.label :finalizado, "¿Finalizado?", class: "form-check-label" %>
             </div>
           </div>
-        </div>
+        </div> 
+<%
+=end%>
         <div class="mb-2">
           <%= tarea_form.label :observaciones, class: "form-label" %>
           <%= tarea_form.text_area :observaciones, rows: 2, class: "form-control" %>

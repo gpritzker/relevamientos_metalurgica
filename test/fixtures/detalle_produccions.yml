@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parte_produccion: one
+  descripcion: MyString
+  componente: MyString
+  cantidad_a_ejecutar: 1
+  cantidad_ejecutada: 1
+  aceptados: 1
+  rechazados: 1
+  hora_inicio: 2025-07-03 08:01:30
+  hora_fin: 2025-07-03 08:01:30
+  tiempo_empleado: 1
+  observaciones: MyText
+
+two:
+  parte_produccion: two
+  descripcion: MyString
+  componente: MyString
+  cantidad_a_ejecutar: 1
+  cantidad_ejecutada: 1
+  aceptados: 1
+  rechazados: 1
+  hora_inicio: 2025-07-03 08:01:30
+  hora_fin: 2025-07-03 08:01:30
+  tiempo_empleado: 1
+  observaciones: MyText

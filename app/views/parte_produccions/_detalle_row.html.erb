@@ -1,0 +1,14 @@
+<tr>
+  <td><%= f.text_field :componente, class: "form-control", placeholder: "Ítem" %></td>
+  <td><%= f.text_field :descripcion, class: "form-control" %></td>
+  <td>
+   <%= f.select :orden_servicio_id, ordenes_servicio.map { |os| [ "#{os.proyecto.nombre} - #{os.tipo_orden_servicio.nombre}", os.id ] }, { prompt: "Seleccionar ODS" }, class: "form-control" %>
+  </td>
+  <td><%= f.number_field :cantidad_a_ejecutar, class: "form-control" %></td>
+  <td><%= f.number_field :cantidad_ejecutada, class: "form-control" %></td>
+  <td><%= f.text_area :observaciones, class: "form-control", rows: 1 %></td>
+  <td><%= f.number_field :aceptados, class: "form-control" %></td>
+  <td><%= f.number_field :rechazados, class: "form-control" %></td>
+  <td><%= f.text_field :firma, class: "form-control" %></td>
+  <td><button type="button" class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">✖</button></td>
+</tr>

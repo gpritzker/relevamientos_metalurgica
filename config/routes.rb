@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :subproductos
+  resources :productos
+  resources :retrabajos
+  resources :no_conformidads
+  resources :documento_proyectos
+  resources :detalle_produccions
+  resources :parte_produccions
+  resources :materials
+  resources :escala_salarials
+  resources :orden_servicios
+  resources :tipo_orden_servicios
+  resources :proyectos
+  resources :tipo_obras
+  resources :clientes
   resources :categoria
   get 'dashboards/index'
   resources :sectors

@@ -8,15 +8,11 @@
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/kaminari-bootstrap@5.1.1/dist/kaminari-bootstrap.min.css" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-
-
-    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </head>
 
   <body class="d-flex flex-column min-vh-100">
 
-    <!-- Botón hamburguesa solo visible en mobile -->
     <nav class="navbar navbar-dark bg-dark d-md-none">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
@@ -27,7 +23,6 @@
     </nav>
 
     <div class="d-flex flex-grow-1">
-      <!-- Sidebar offcanvas para mobile y visible en desktop -->
       <div class="offcanvas-md offcanvas-start bg-dark text-white" style="min-height: 100vh;" tabindex="-1" id="sidebar">
         <div class="offcanvas-header d-md-none">
           <h5 class="offcanvas-title">Menú</h5>
@@ -40,12 +35,7 @@
 
           <ul class="nav nav-pills flex-column mb-auto">
             <li><%= link_to raw('<i class="bi bi-house"></i> Dashboard'), dashboard_path, class: "nav-link text-white" %></li>
-            <li>
-              <%= link_to raw('<i class="bi bi-bar-chart-fill"></i> Dashboard Fullscreen'),
-                  dashboard_fullscreen_path,
-                  target: "_blank",
-                  class: "nav-link text-white" %>
-            </li>
+            <li><%= link_to raw('<i class="bi bi-bar-chart-fill"></i> Dashboard Fullscreen'), dashboard_fullscreen_path, target: "_blank", class: "nav-link text-white" %></li>
             <li><%= link_to raw('<i class="bi bi-list-task"></i> Partes Diarios'), parte_diarios_path, class: "nav-link text-white" %></li>
             <li><%= link_to raw('<i class="bi bi-check2-circle"></i> Tareas Realizadas'), tarea_realizadas_path, class: "nav-link text-white" %></li>
             <li><%= link_to raw('<i class="bi bi-clock-history"></i> Tiempos Muertos'), tiempo_muertos_path, class: "nav-link text-white" %></li>
@@ -54,18 +44,27 @@
             <li><%= link_to raw('<i class="bi bi-diagram-3"></i> Sectores'), sectors_path, class: "nav-link text-white" %></li>
             <li><%= link_to raw('<i class="bi bi-building"></i> Empresas'), empresas_path, class: "nav-link text-white" %></li>
             <li><%= link_to raw('<i class="bi bi-folder2-open"></i> Categorías'), categoria_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-list-task"></i> Partes Producción'), parte_produccions_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-check2-circle"></i> Detalle Producción'), detalle_produccions_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-gear"></i> Ordenes de Servicio'), orden_servicios_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-archive"></i> Proyectos'), proyectos_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-briefcase"></i> Clientes'), clientes_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-box"></i> Materiales'), materials_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-cash-stack"></i> Escalas Salariales'), escala_salarials_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-tag"></i> Tipos de ODS'), tipo_orden_servicios_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-diagram-3"></i> Tipos de Obra'), tipo_obras_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-file-earmark-text"></i> Documentación Proyectos'), documento_proyectos_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-boxes"></i> Productos'), productos_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-box-seam"></i> Subproductos'), subproductos_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-exclamation-octagon"></i> No Conformidades'), no_conformidads_path, class: "nav-link text-white" %></li>
+            <li><%= link_to raw('<i class="bi bi-arrow-repeat"></i> Retrabajos'), retrabajos_path, class: "nav-link text-white" %></li>
           </ul>
 
           <hr class="text-white mt-auto">
-
-          <%= button_to raw('<i class="bi bi-box-arrow-right"></i> Cerrar sesión'),
-                destroy_usuario_session_path,
-                method: :delete,
-                class: "btn btn-outline-light btn-sm w-100" %>
+          <%= button_to raw('<i class="bi bi-box-arrow-right"></i> Cerrar sesión'), destroy_usuario_session_path, method: :delete, class: "btn btn-outline-light btn-sm w-100" %>
         </div>
       </div>
 
-      <!-- Main content -->
       <main class="flex-grow-1 p-4 overflow-auto">
         <% if notice %>
           <div class="alert alert-success d-flex align-items-center">
@@ -81,5 +80,13 @@
         <%= yield %>
       </main>
     </div>
+
+    <% if @sectores && @subproductos && @materiales %>
+      <script>
+        window.sectores = <%= raw @sectores.map { |s| { id: s.id, nombre: s.nombre } }.to_json %>;
+        window.subproductos = <%= raw @subproductos.map { |sp| { id: sp.id, nombre: sp.nombre, sector_id: sp.sector_id } }.to_json %>;
+        window.materiales = <%= raw @materiales.map { |m| { id: m.id, nombre: m.nombre } }.to_json %>;
+      </script>
+    <% end %>
   </body>
 </html>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Retrabajos</h1>
+
+<div id="retrabajos">
+  <% @retrabajos.each do |retrabajo| %>
+    <%= render retrabajo %>
+    <p>
+      <%= link_to "Show this retrabajo", retrabajo %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New retrabajo", new_retrabajo_path %>

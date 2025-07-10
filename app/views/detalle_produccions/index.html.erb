@@ -1,0 +1,40 @@
+<h1>Detalles de Producción</h1>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Parte Producción</th>
+      <th>Descripción</th>
+      <th>Item</th>
+      <th>Ejecutar</th>
+      <th>Ejecutado</th>
+      <th>Aceptados</th>
+      <th>Rechazados</th>
+      <th>Observaciones</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @detalle_produccions.each do |detalle| %>
+      <tr>
+        <td><%= detalle.id %></td>
+        <td><%= detalle.parte_produccion_id %></td>
+        <td><%= detalle.descripcion %></td>
+        <td><%= detalle.componente %></td>
+        <td><%= detalle.cantidad_a_ejecutar %></td>
+        <td><%= detalle.cantidad_ejecutada %></td>
+        <td><%= detalle.aceptados %></td>
+        <td><%= detalle.rechazados %></td>
+        <td><%= detalle.observaciones %></td>
+        <td>
+          <%= link_to '👁️', detalle_produccion_path(detalle), class: 'btn btn-sm btn-outline-secondary', title: 'Ver' %>
+          <%= link_to '✏️', edit_detalle_produccion_path(detalle), class: 'btn btn-sm btn-primary', title: 'Editar' %>
+          <%= link_to '🗑️', detalle_produccion_path(detalle), method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-sm btn-danger', title: 'Eliminar' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '➕ Nuevo Detalle de Producción', new_detalle_produccion_path, class: 'btn btn-success' %>

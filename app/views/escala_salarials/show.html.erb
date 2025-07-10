@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @escala_salarial %>
+
+<div>
+  <%= link_to "Edit this escala salarial", edit_escala_salarial_path(@escala_salarial) %> |
+  <%= link_to "Back to escala salarials", escala_salarials_path %>
+
+  <%= button_to "Destroy this escala salarial", @escala_salarial, method: :delete %>
+</div>

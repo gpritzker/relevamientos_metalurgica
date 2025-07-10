@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @subproducto %>
+
+<div>
+  <%= link_to "Edit this subproducto", edit_subproducto_path(@subproducto) %> |
+  <%= link_to "Back to subproductos", subproductos_path %>
+
+  <%= button_to "Destroy this subproducto", @subproducto, method: :delete %>
+</div>

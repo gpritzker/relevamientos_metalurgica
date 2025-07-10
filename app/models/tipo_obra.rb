@@ -1,0 +1,2 @@
+class TipoObra < ApplicationRecord
+end

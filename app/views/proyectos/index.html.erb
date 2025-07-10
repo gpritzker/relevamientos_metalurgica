@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="mb-0">📁 Proyectos</h1>
+  <%= link_to '➕ Crear Proyecto', new_proyecto_path, class: 'btn btn-success' %>
+</div>
+
+<table class="table table-hover table-striped align-middle">
+  <thead class="table-light">
+    <tr>
+      <th>📌 Nombre</th>
+      <th>👤 Cliente</th>
+      <th>📍 Ubicación</th>
+      <th>🛠 Órdenes</th>
+      <th class="text-end">⚙️ Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @proyectos.each do |proyecto| %>
+      <tr>
+        <td><strong><%= proyecto.nombre %></strong></td>
+        <td><%= proyecto.cliente&.nombre || "—" %></td>
+        <td><%= proyecto.ubicacion %></td>
+        <td>
+          <% if proyecto.proyecto_orden_servicios.any? %>
+            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#ordenes-<%= proyecto.id %>">
+              Ver Órdenes (<%= proyecto.proyecto_orden_servicios.size %>)
+            </button>
+          <% else %>
+            <span class="text-muted">Sin órdenes</span>
+          <% end %>
+        </td>
+        <td class="text-end">
+          <%= link_to '👁 Ver', proyecto_path(proyecto), class: 'btn btn-sm btn-outline-primary mb-1' %><br>
+          <%= link_to '✏️ Editar', edit_proyecto_path(proyecto), class: 'btn btn-sm btn-outline-secondary' %>
+        </td>
+      </tr>
+
+      <% if proyecto.proyecto_orden_servicios.any? %>
+        <tr class="collapse" id="ordenes-<%= proyecto.id %>">
+          <td colspan="5">
+            <div class="accordion accordion-flush" id="accordion-<%= proyecto.id %>">
+              <% proyecto.proyecto_orden_servicios.each_with_index do |pos, i| %>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="heading-<%= proyecto.id %>-<%= i %>">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= proyecto.id %>-<%= i %>">
+                      🛠 Orden: <%= pos.orden_servicio&.codigo || "Sin código" %>
+                    </button>
+                  </h2>
+                  <div id="collapse-<%= proyecto.id %>-<%= i %>" class="accordion-collapse collapse" data-bs-parent="#accordion-<%= proyecto.id %>">
+                    <div class="accordion-body">
+                      <p><strong>Sector:</strong> <%= pos.sector&.nombre %></p>
+                      <p><strong>Subproducto:</strong> <%= pos.subproducto&.nombre %></p>
+                      <p><strong>Material:</strong> <%= pos.material&.nombre %></p>
+                      <p><strong>Descripción:</strong> <%= pos.descripcion %></p>
+                      <p><strong>Tiempo:</strong> <%= pos.tiempo %></p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

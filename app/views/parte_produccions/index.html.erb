@@ -1,0 +1,109 @@
+<h1>Partes de Producción</h1>
+
+<div class="mb-3">
+  <%= link_to '➕ Nuevo Parte de Producción', new_parte_produccion_path, class: 'btn btn-success' %>
+</div>
+
+<%= form_with url: parte_produccions_path, method: :get, local: true, class: "row g-3 mb-4" do %>
+  <div class="col-md-3">
+    <%= label_tag :sector_id, "Sector" %>
+    <%= select_tag :sector_id,
+        options_from_collection_for_select(@sectores, :id, :nombre, params[:sector_id]),
+        include_blank: "Todos",
+        class: "form-select" %>
+  </div>
+
+  <div class="col-md-3">
+    <%= label_tag :fecha_desde, "Fecha desde" %>
+    <%= date_field_tag :fecha_desde, params[:fecha_desde], class: "form-control" %>
+  </div>
+
+  <div class="col-md-3">
+    <%= label_tag :fecha_hasta, "Fecha hasta" %>
+    <%= date_field_tag :fecha_hasta, params[:fecha_hasta], class: "form-control" %>
+  </div>
+
+  <div class="col-md-3 d-flex align-items-end">
+    <%= submit_tag "Buscar", class: "btn btn-primary me-2" %>
+    <%= link_to "Limpiar", parte_produccions_path, class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>
+
+<% if params[:sector_id].present? || params[:fecha_desde].present? || params[:fecha_hasta].present? %>
+  <div class="alert alert-info">
+    Mostrando resultados filtrados
+    <% if params[:sector_id].present? %>
+      – Sector: <%= Sector.find_by(id: params[:sector_id])&.nombre %>
+    <% end %>
+    <% if params[:fecha_desde].present? %>
+      – Desde: <%= params[:fecha_desde] %>
+    <% end %>
+    <% if params[:fecha_hasta].present? %>
+      – Hasta: <%= params[:fecha_hasta] %>
+    <% end %>
+  </div>
+<% end %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Sector</th>
+      <th>Fecha</th>
+      <th>Detalles</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @parte_produccions.each_with_index do |parte, i| %>
+      <tr>
+        <td><%= parte.sector&.nombre %></td>
+        <td><%= parte.fecha %></td>
+        <td>
+          <%= pluralize(parte.detalle_produccions.size, 'fila') %>
+          <button class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="collapse" data-bs-target="#detalles-<%= parte.id %>">
+            Ver detalles
+          </button>
+        </td>
+        <td>
+          <%= link_to '✏️ Editar', edit_parte_produccion_path(parte), class: 'btn btn-primary btn-sm' %>
+          <%= link_to '🗑️ Eliminar', parte_produccion_path(parte), method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+
+      <tr class="collapse" id="detalles-<%= parte.id %>">
+        <td colspan="4">
+          <% if parte.detalle_produccions.any? %>
+            <table class="table table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th>Descripción</th>
+                  <th>Item</th>
+                  <th>Ejecutar</th>
+                  <th>Ejecutado</th>
+                  <th>Aceptados</th>
+                  <th>Rechazados</th>
+                  <th>Observaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% parte.detalle_produccions.each do |detalle| %>
+                  <tr>
+                    <td><%= detalle.descripcion %></td>
+                    <td><%= detalle.componente %></td>
+                    <td><%= detalle.cantidad_a_ejecutar %></td>
+                    <td><%= detalle.cantidad_ejecutada %></td>
+                    <td><%= detalle.aceptados %></td>
+                    <td><%= detalle.rechazados %></td>
+                    <td><%= detalle.observaciones %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <p class="text-muted">Sin detalles</p>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

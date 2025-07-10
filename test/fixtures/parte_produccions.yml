@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  operario: one
+  orden_servicio: one
+  fecha: 2025-07-03
+  jornada_laboral: 1
+  observaciones: MyText
+
+two:
+  operario: two
+  orden_servicio: two
+  fecha: 2025-07-03
+  jornada_laboral: 1
+  observaciones: MyText

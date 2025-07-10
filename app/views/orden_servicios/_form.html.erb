@@ -1,0 +1,50 @@
+<%= form_with(model: orden_servicio, local: true) do |f| %>
+  <% if orden_servicio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(orden_servicio.errors.count, "error") %> prohibited this orden de servicio from being saved:</h2>
+      <ul>
+        <% orden_servicio.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :proyecto_id, "Proyecto" %>
+    <%= f.collection_select :proyecto_id, @proyectos, :id, :nombre, prompt: "Seleccionar proyecto", class: "form-control" %>
+  </div>
+  
+
+  <div class="mb-3">
+    <%= f.label :tipo_orden_servicio_id, "Tipo orden servicio" %>
+    <%= f.collection_select :tipo_orden_servicio_id, @tipos_orden_servicio, :id, :nombre, prompt: "Seleccionar tipo", class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :fecha_inicio %>
+    <%= f.date_field :fecha_inicio, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :fecha_entrega %>
+    <%= f.date_field :fecha_entrega, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :estado %>
+    <%= f.text_field :estado, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :observaciones %>
+    <%= f.text_area :observaciones, class: "form-control", rows: 3 %>
+  </div>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

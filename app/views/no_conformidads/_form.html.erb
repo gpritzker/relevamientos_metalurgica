@@ -1,0 +1,37 @@
+<%= form_with(model: no_conformidad) do |form| %>
+  <% if no_conformidad.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(no_conformidad.errors.count, "error") %> prohibited this no_conformidad from being saved:</h2>
+
+      <ul>
+        <% no_conformidad.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :detalle_produccion_id, style: "display: block" %>
+    <%= form.text_field :detalle_produccion_id %>
+  </div>
+
+  <div>
+    <%= form.label :motivo, style: "display: block" %>
+    <%= form.text_field :motivo %>
+  </div>
+
+  <div>
+    <%= form.label :cantidad_afectada, style: "display: block" %>
+    <%= form.number_field :cantidad_afectada %>
+  </div>
+
+  <div>
+    <%= form.label :observaciones, style: "display: block" %>
+    <%= form.text_area :observaciones %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

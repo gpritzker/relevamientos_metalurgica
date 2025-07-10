@@ -1,4 +1,20 @@
 es:
+  activerecord:
+    models:
+      orden_servicio: "Orden de Servicio"
+    attributes:
+      orden_servicio:
+        proyecto: "Proyecto"
+        tipo_orden_servicio: "Tipo de Orden de Servicio"
+        descripcion: "Descripción"
+        fecha_inicio: "Fecha de Inicio"
+        fecha_entrega: "Fecha de Entrega"
+        estado: "Estado"
+        observaciones: "Observaciones"
+  errors:
+    messages:
+      required: "no puede estar en blanco"
+      record_invalid: "La validación falló: %{errors}"
   views:
     pagination:
       first: "Primera"

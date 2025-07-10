@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proyecto: one
+  orden_servicio: one
+  sector: one
+  subproducto: one
+  material: one
+  descripcion: MyString
+  tiempo: MyString
+
+two:
+  proyecto: two
+  orden_servicio: two
+  sector: two
+  subproducto: two
+  material: two
+  descripcion: MyString
+  tiempo: MyString

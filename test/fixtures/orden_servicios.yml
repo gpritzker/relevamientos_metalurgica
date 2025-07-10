@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proyecto: one
+  tipo_orden_servicio: one
+  descripcion: MyString
+  fecha_inicio: 2025-07-03
+  fecha_entrega: 2025-07-03
+  estado: MyString
+  observaciones: MyText
+
+two:
+  proyecto: two
+  tipo_orden_servicio: two
+  descripcion: MyString
+  fecha_inicio: 2025-07-03
+  fecha_entrega: 2025-07-03
+  estado: MyString
+  observaciones: MyText

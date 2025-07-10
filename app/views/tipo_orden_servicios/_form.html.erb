@@ -1,0 +1,22 @@
+<%= form_with(model: tipo_orden_servicio) do |form| %>
+  <% if tipo_orden_servicio.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(tipo_orden_servicio.errors.count, "error") %> prohibited this tipo_orden_servicio from being saved:</h2>
+
+      <ul>
+        <% tipo_orden_servicio.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nombre, style: "display: block" %>
+    <%= form.text_field :nombre %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>No conformidads</h1>
+
+<div id="no_conformidads">
+  <% @no_conformidads.each do |no_conformidad| %>
+    <%= render no_conformidad %>
+    <p>
+      <%= link_to "Show this no conformidad", no_conformidad %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New no conformidad", new_no_conformidad_path %>

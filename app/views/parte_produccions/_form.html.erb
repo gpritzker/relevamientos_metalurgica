@@ -1,0 +1,42 @@
+<%= form_with(model: parte_produccion) do |form| %>
+  <% if parte_produccion.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(parte_produccion.errors.count, "error") %> prohibited this parte_produccion from being saved:</h2>
+
+      <ul>
+        <% parte_produccion.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :operario_id, style: "display: block" %>
+    <%= form.text_field :operario_id %>
+  </div>
+
+  <div>
+    <%= form.label :orden_servicio_id, style: "display: block" %>
+    <%= form.text_field :orden_servicio_id %>
+  </div>
+
+  <div>
+    <%= form.label :fecha, style: "display: block" %>
+    <%= form.date_field :fecha %>
+  </div>
+
+  <div>
+    <%= form.label :jornada_laboral, style: "display: block" %>
+    <%= form.number_field :jornada_laboral %>
+  </div>
+
+  <div>
+    <%= form.label :observaciones, style: "display: block" %>
+    <%= form.text_area :observaciones %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

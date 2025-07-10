@@ -1,0 +1,86 @@
+<h1>Nuevo Parte de Producción</h1>
+
+<%= form_with(model: @parte_produccion, url: parte_produccions_path, method: :post, local: true) do |f| %>
+  <div class="row mb-3">
+    <div class="col">
+      <%= f.label :sector_id, "Sector", class: "form-label" %>
+      <%= f.collection_select :sector_id, @sectores, :id, :nombre, { prompt: "Seleccionar sector" }, { class: "form-control" } %>
+    </div>
+    <div class="col">
+      <%= f.label :fecha, class: "form-label" %>
+      <%= f.date_field :fecha, class: "form-control" %>
+    </div>
+  </div>
+
+  <h4 class="mt-4">Detalle de Producción</h4>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Ítem</th>
+          <th>Descripción</th>
+          <th>ODS</th>
+          <th>Cant. a Ejecutar</th>
+          <th>Cant. Ejecutada</th>
+          <th>Observaciones</th>
+          <th>Aceptados</th>
+          <th>Rechazados</th>
+          <th>Firma</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="detalles-container">
+        <%= f.fields_for :detalle_produccions do |df| %>
+          <%= render 'detalle_row', f: df, ordenes_servicio: @ordenes_servicio %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mb-4">
+    <button type="button" class="btn btn-secondary me-2" id="add-detalle-row">
+      <i class="bi bi-plus-circle"></i> Agregar Fila
+    </button>
+    <%= f.submit 'Guardar Parte de Producción', class: "btn btn-success" %>
+  </div>
+
+  <%# Generamos el template dentro del form pero con contenido estático %>
+  <template id="row-template">
+    <tr>
+      <td><input class="form-control" placeholder="Ítem" type="text" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][componente]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_componente" /></td>
+      <td><input class="form-control" type="text" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][descripcion]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_descripcion" /></td>
+      <td>
+        <select class="form-control" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][orden_servicio_id]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_orden_servicio_id">
+          <option value="">Seleccionar ODS</option>
+          <% @ordenes_servicio.each do |ods| %>
+            <option value="<%= ods.id %>"><%= ods.descripcion %></option>
+          <% end %>
+        </select>
+      </td>
+      <td><input class="form-control" type="number" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][cantidad_a_ejecutar]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_cantidad_a_ejecutar" /></td>
+      <td><input class="form-control" type="number" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][cantidad_ejecutada]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_cantidad_ejecutada" /></td>
+      <td><textarea class="form-control" rows="1" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][observaciones]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_observaciones"></textarea></td>
+      <td><input class="form-control" type="number" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][aceptados]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_aceptados" /></td>
+      <td><input class="form-control" type="number" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][rechazados]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_rechazados" /></td>
+      <td><input class="form-control" type="text" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][firma]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_firma" /></td>
+      <td><button type="button" class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">✖</button></td>
+    </tr>
+  </template>
+<% end %>
+
+<%= javascript_tag do %>
+  document.getElementById('add-detalle-row').addEventListener('click', function() {
+    const time = new Date().getTime();
+    const container = document.getElementById('detalles-container');
+    const template = document.getElementById('row-template');
+    const newRow = template.content.cloneNode(true);
+    
+    // Actualizar todos los campos con el nuevo ID
+    newRow.querySelectorAll('[name], [id]').forEach(el => {
+      if (el.name) el.name = el.name.replace('NEW_RECORD', time);
+      if (el.id) el.id = el.id.replace('NEW_RECORD', time);
+    });
+    
+    container.appendChild(newRow);
+  });
+<% end %>

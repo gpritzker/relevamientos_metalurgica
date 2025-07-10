@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Documento proyectos</h1>
+
+<div id="documento_proyectos">
+  <% @documento_proyectos.each do |documento_proyecto| %>
+    <%= render documento_proyecto %>
+    <p>
+      <%= link_to "Show this documento proyecto", documento_proyecto %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New documento proyecto", new_documento_proyecto_path %>

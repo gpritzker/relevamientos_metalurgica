@@ -1,0 +1,29 @@
+<%= form_with(model: subproducto, local: true) do |f| %>
+  <% if subproducto.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(subproducto.errors.count, "error") %> impidieron guardar el subproducto:</h4>
+      <ul>
+        <% subproducto.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :nombre, "Nombre del Subproducto" %>
+    <%= f.text_field :nombre, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :producto_id, "Producto" %>
+    <%= f.collection_select :producto_id, Producto.all, :id, :nombre, prompt: "Seleccionar producto", class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :sector_id, "Sector" %>
+    <%= f.collection_select :sector_id, Sector.all, :id, :nombre, prompt: "Seleccionar sector", class: "form-control", required: true %>
+  </div>
+
+  <%= f.submit "Guardar", class: "btn btn-primary" %>
+<% end %>

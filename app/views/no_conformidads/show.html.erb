@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @no_conformidad %>
+
+<div>
+  <%= link_to "Edit this no conformidad", edit_no_conformidad_path(@no_conformidad) %> |
+  <%= link_to "Back to no conformidads", no_conformidads_path %>
+
+  <%= button_to "Destroy this no conformidad", @no_conformidad, method: :delete %>
+</div>
