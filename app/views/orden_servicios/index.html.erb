@@ -1,14 +1,51 @@
-<p style="color: green"><%= notice %></p>
+<%# 📌 Mensaje de éxito %>
+<% if notice.present? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
 
-<h1>Orden servicios</h1>
-
-<div id="orden_servicios">
-  <% @orden_servicios.each do |orden_servicio| %>
-    <%= render orden_servicio %>
-    <p>
-      <%= link_to "Show this orden servicio", orden_servicio %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Órdenes de Servicio</h1>
+  <%= link_to '➕ Nueva Orden de Servicio', new_orden_servicio_path, class: 'btn btn-success' %>
 </div>
 
-<%= link_to "New orden servicio", new_orden_servicio_path %>
+<% if @orden_servicios.any? %>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-light">
+        <tr>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Entrega</th>
+          <th>Estado</th>
+          <th>Proyecto</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orden_servicios.each do |orden| %>
+          <tr>
+            <td><%= orden.codigo %></td>
+            <td><%= orden.descripcion %></td>
+            <td><%= orden.fecha_inicio&.strftime('%d/%m/%Y') %></td>
+            <td><%= orden.fecha_entrega&.strftime('%d/%m/%Y') %></td>
+            <td><%= orden.estado %></td>
+            <td><%= orden.proyecto&.nombre || '-' %></td>
+            <td>
+              <%= link_to '👁 Ver', orden_servicio_path(orden), class: 'btn btn-sm btn-outline-primary' %>
+              <%= link_to '✏️ Editar', edit_orden_servicio_path(orden), class: 'btn btn-sm btn-outline-secondary' %>
+              <%= link_to '🗑️ Eliminar', orden_servicio_path(orden),
+                          method: :delete,
+                          data: { confirm: '¿Estás seguro de eliminar esta orden?' },
+                          class: 'btn btn-sm btn-outline-danger mt-1' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="alert alert-warning">
+    No hay órdenes de servicio registradas.
+  </div>
+<% end %>

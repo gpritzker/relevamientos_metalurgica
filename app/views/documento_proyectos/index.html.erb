@@ -1,14 +1,49 @@
-<p style="color: green"><%= notice %></p>
+<%# 📌 Mensaje de notificación %>
+<% if notice.present? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
 
-<h1>Documento proyectos</h1>
-
-<div id="documento_proyectos">
-  <% @documento_proyectos.each do |documento_proyecto| %>
-    <%= render documento_proyecto %>
-    <p>
-      <%= link_to "Show this documento proyecto", documento_proyecto %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>📋 Documentación de Proyectos</h1>
+  <%= link_to '➕ Nuevo Documento', new_documento_proyecto_path, class: 'btn btn-success' %>
 </div>
 
-<%= link_to "New documento proyecto", new_documento_proyecto_path %>
+<% if @documento_proyectos.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Proyecto</th>
+          <th>Nombre</th>
+          <th>Presente</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @documento_proyectos.each do |doc| %>
+          <tr>
+            <td><%= doc.proyecto&.nombre || '-' %></td>
+            <td><%= doc.nombre %></td>
+            <td>
+              <% if doc.presente %>
+                <span class="badge bg-success">✅ Sí</span>
+              <% else %>
+                <span class="badge bg-secondary">❌ No</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to '👁 Ver', documento_proyecto_path(doc), class: 'btn btn-sm btn-outline-primary me-1' %>
+              <%= link_to '✏️ Editar', edit_documento_proyecto_path(doc), class: 'btn btn-sm btn-outline-secondary me-1' %>
+              <%= link_to '🗑️ Eliminar', documento_proyecto_path(doc),
+                          method: :delete,
+                          data: { confirm: '¿Eliminar este documento?' },
+                          class: 'btn btn-sm btn-outline-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="alert alert-warning">No hay documentación cargada aún.</div>
+<% end %>

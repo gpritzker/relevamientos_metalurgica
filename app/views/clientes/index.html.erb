@@ -1,14 +1,43 @@
-<p style="color: green"><%= notice %></p>
+<%# ✅ Mensaje de éxito si hay notice %>
+<% if notice.present? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
 
-<h1>Clientes</h1>
-
-<div id="clientes">
-  <% @clientes.each do |cliente| %>
-    <%= render cliente %>
-    <p>
-      <%= link_to "Show this cliente", cliente %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>🧑‍💼 Clientes</h1>
+  <%= link_to '➕ Nuevo Cliente', new_cliente_path, class: 'btn btn-success' %>
 </div>
 
-<%= link_to "New cliente", new_cliente_path %>
+<% if @clientes.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clientes.each do |cliente| %>
+          <tr>
+            <td><%= cliente.nombre %></td>
+            <td><%= cliente.email.presence || '-' %></td>
+            <td><%= cliente.telefono.presence || '-' %></td>
+            <td>
+              <%= link_to '👁 Ver', cliente_path(cliente), class: 'btn btn-sm btn-outline-primary me-1' %>
+              <%= link_to '✏️ Editar', edit_cliente_path(cliente), class: 'btn btn-sm btn-outline-secondary me-1' %>
+              <%= link_to '🗑️ Eliminar', cliente_path(cliente),
+                          method: :delete,
+                          data: { confirm: '¿Estás seguro que querés eliminar este cliente?' },
+                          class: 'btn btn-sm btn-outline-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="alert alert-warning">No hay clientes cargados aún.</div>
+<% end %>

@@ -67,6 +67,7 @@
         <td>
           <%= link_to '✏️ Editar', edit_parte_produccion_path(parte), class: 'btn btn-primary btn-sm' %>
           <%= link_to '🗑️ Eliminar', parte_produccion_path(parte), method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger btn-sm' %>
+          <%= link_to '🔍 Ver', parte_produccion_path(parte), class: 'btn btn-outline-info btn-sm' %>
         </td>
       </tr>
 
@@ -83,6 +84,7 @@
                   <th>Aceptados</th>
                   <th>Rechazados</th>
                   <th>Observaciones</th>
+                  <th>Firma</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,6 +97,13 @@
                     <td><%= detalle.aceptados %></td>
                     <td><%= detalle.rechazados %></td>
                     <td><%= detalle.observaciones %></td>
+                    <td>
+                      <% if detalle.firma.present? %>
+                        <img src="<%= detalle.firma %>" alt="Firma" style="max-height: 50px; border: 1px solid #ccc;">
+                      <% else %>
+                        <span class="text-muted">Sin firma</span>
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>

@@ -44,7 +44,6 @@
     <%= f.submit 'Guardar Parte de Producción', class: "btn btn-success" %>
   </div>
 
-  <%# Generamos el template dentro del form pero con contenido estático %>
   <template id="row-template">
     <tr>
       <td><input class="form-control" placeholder="Ítem" type="text" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][componente]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_componente" /></td>
@@ -62,25 +61,73 @@
       <td><textarea class="form-control" rows="1" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][observaciones]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_observaciones"></textarea></td>
       <td><input class="form-control" type="number" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][aceptados]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_aceptados" /></td>
       <td><input class="form-control" type="number" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][rechazados]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_rechazados" /></td>
-      <td><input class="form-control" type="text" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][firma]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_firma" /></td>
+      <td>
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalFirma(this)">Firmar</button>
+        <input type="hidden" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][firma]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_firma" />
+      </td>
       <td><button type="button" class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">✖</button></td>
     </tr>
   </template>
 <% end %>
 
+<!-- Modal Firma -->
+<div class="modal fade" id="firmaModal" tabindex="-1" aria-labelledby="firmaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Firma del Operario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-center">
+        <canvas id="firmaCanvas" width="500" height="200" style="border: 1px solid #ccc;"></canvas>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="limpiarFirma">Limpiar</button>
+        <button type="button" class="btn btn-primary" id="guardarFirma" data-bs-dismiss="modal">Guardar Firma</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Librería SignaturePad -->
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
 <%= javascript_tag do %>
+  // Agregar fila
   document.getElementById('add-detalle-row').addEventListener('click', function() {
     const time = new Date().getTime();
     const container = document.getElementById('detalles-container');
     const template = document.getElementById('row-template');
     const newRow = template.content.cloneNode(true);
-    
-    // Actualizar todos los campos con el nuevo ID
+
     newRow.querySelectorAll('[name], [id]').forEach(el => {
-      if (el.name) el.name = el.name.replace('NEW_RECORD', time);
-      if (el.id) el.id = el.id.replace('NEW_RECORD', time);
+      if (el.name) el.name = el.name.replace(/NEW_RECORD/g, time);
+      if (el.id) el.id = el.id.replace(/NEW_RECORD/g, time);
     });
-    
+
     container.appendChild(newRow);
+  });
+
+  // Firma modal
+  let currentInputFirma = null;
+  const modalFirma = new bootstrap.Modal(document.getElementById('firmaModal'));
+  const canvas = document.getElementById('firmaCanvas');
+  const signaturePad = new SignaturePad(canvas);
+
+  window.abrirModalFirma = function(button) {
+    const input = button.nextElementSibling;
+    currentInputFirma = input;
+    signaturePad.clear();
+    modalFirma.show();
+  }
+
+  document.getElementById('guardarFirma').addEventListener('click', function() {
+    if (!signaturePad.isEmpty() && currentInputFirma) {
+      currentInputFirma.value = signaturePad.toDataURL();
+    }
+  });
+
+  document.getElementById('limpiarFirma').addEventListener('click', function() {
+    signaturePad.clear();
   });
 <% end %>

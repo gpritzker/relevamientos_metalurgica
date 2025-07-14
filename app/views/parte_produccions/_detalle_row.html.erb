@@ -9,6 +9,9 @@
   <td><%= f.text_area :observaciones, class: "form-control", rows: 1 %></td>
   <td><%= f.number_field :aceptados, class: "form-control" %></td>
   <td><%= f.number_field :rechazados, class: "form-control" %></td>
-  <td><%= f.text_field :firma, class: "form-control" %></td>
+  <td>
+  <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalFirma(this)">Firmar</button>
+  <%= f.hidden_field :firma %>
+</td>
   <td><button type="button" class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">✖</button></td>
 </tr>

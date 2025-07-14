@@ -19,7 +19,13 @@
           <p><strong>Hora fin:</strong> <%= detalle.hora_fin %></p>
           <p><strong>Tiempo empleado:</strong> <%= detalle.tiempo_empleado %></p>
           <p><strong>Observaciones:</strong> <%= detalle.observaciones %></p>
-          <p><strong>Firma:</strong> <%= detalle.firma %></p>
+
+          <% if detalle.firma.present? %>
+            <p><strong>Firma:</strong></p>
+            <img src="<%= detalle.firma %>" alt="Firma del operario" style="border: 1px solid #ccc; max-width: 400px; height: auto;">
+          <% else %>
+            <p><strong>Firma:</strong> No registrada</p>
+          <% end %>
         </div>
       </div>
     </div>
