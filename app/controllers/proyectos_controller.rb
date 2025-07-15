@@ -17,6 +17,7 @@ class ProyectosController < ApplicationController
     @tipos_obra = TipoObra.all
     @proyecto.documentos_proyecto.build
     @proyecto.proyecto_orden_servicios.build
+    @ordenes_servicio = OrdenServicio.all
 
     # Carga datos JS globales
     @sectores = Sector.all

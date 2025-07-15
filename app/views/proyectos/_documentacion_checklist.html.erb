@@ -1,0 +1,56 @@
+<!-- Técnica -->
+<h6 class="mt-4">📂 Técnica</h6>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead><tr><th>Nombre</th><th class="text-center">Entregado</th></tr></thead>
+    <tbody>
+      <% ['Planta', 'Cortes', 'Vistas', 'Plano Eléctrico', 'Esquema unifilar', 'Planilla de consumos', 'Planta sanitario', 'Plano de agua', '3D'].each_with_index do |nombre, i| %>
+        <tr>
+          <td><%= nombre %></td>
+          <td class="text-center">
+            <%= check_box_tag "proyecto[documentos_proyecto_attributes][#{i}][presente]", true, false %>
+            <%= hidden_field_tag "proyecto[documentos_proyecto_attributes][#{i}][nombre]", nombre %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<!-- Gestión -->
+<h6 class="mt-4">📁 Gestión</h6>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead><tr><th>Nombre</th><th class="text-center">Entregado</th></tr></thead>
+    <tbody>
+      <% ['Instructivo de montaje', 'Computo mano de obra', 'Conforme a obra y computo real de materiales', 'Plan de trabajo', 'Control presupuestario, mano de obra y materiales', 'Calculo de estructura'].each_with_index do |nombre, i| %>
+        <tr>
+          <td><%= nombre %></td>
+          <td class="text-center">
+            <%= check_box_tag "proyecto[documentos_proyecto_attributes][#{i + 9}][presente]", true, false %>
+            <%= hidden_field_tag "proyecto[documentos_proyecto_attributes][#{i + 9}][nombre]", nombre %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<!-- Producción -->
+<h6 class="mt-4">🏭 Producción</h6>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead><tr><th>Nombre</th><th class="text-center">Entregado</th></tr></thead>
+    <tbody>
+      <% ['Armado carpeta digital', 'Armado carpeta jefe de taller y jefes de areas', 'Armado planilla producción'].each_with_index do |nombre, i| %>
+        <tr>
+          <td><%= nombre %></td>
+          <td class="text-center">
+            <%= check_box_tag "proyecto[documentos_proyecto_attributes][#{i + 15}][presente]", true, false %>
+            <%= hidden_field_tag "proyecto[documentos_proyecto_attributes][#{i + 15}][nombre]", nombre %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

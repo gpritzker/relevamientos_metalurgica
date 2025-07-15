@@ -1,0 +1,51 @@
+<template id="orden-template">
+  <div class="row g-2 mb-2 orden-servicio-fields">
+    <div class="col-md-2">
+      <label>Código de Orden</label>
+      <select name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][orden_servicio_id]" class="form-select">
+        <option value="">Seleccionar</option>
+        <% ordenes.each do |os| %>
+          <option value="<%= os.id %>"><%= os.codigo %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label>Sector</label>
+      <select name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][sector_id]" class="form-select">
+        <option value="">Sector</option>
+        <% sectores.each do |s| %>
+          <option value="<%= s.id %>"><%= s.nombre %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label>Subproducto</label>
+      <select name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][subproducto_id]" class="form-select">
+        <option value="">Subproducto</option>
+        <% subproductos.each do |sp| %>
+          <option value="<%= sp.id %>"><%= sp.nombre %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label>Material</label>
+      <select name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][material_id]" class="form-select">
+        <option value="">Material</option>
+        <% materiales.each do |m| %>
+          <option value="<%= m.id %>"><%= m.nombre %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label>Descripción</label>
+      <input type="text" name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][descripcion]" class="form-control" placeholder="Descripción">
+    </div>
+    <div class="col-md-1">
+      <label>Tiempo</label>
+      <input type="text" name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][tiempo]" class="form-control" placeholder="Tiempo">
+    </div>
+    <div class="col-md-1 d-flex align-items-end">
+      <button type="button" class="btn btn-danger remove-orden">✕</button>
+    </div>
+  </div>
+</template>

@@ -1,199 +1,49 @@
 <%= form_with(model: @proyecto, local: true) do |f| %>
-  <!-- 🔹 Datos del Proyecto -->
-  <div class="row">
-    <div class="col">
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
       <%= f.label :nombre %>
       <%= f.text_field :nombre, class: "form-control" %>
     </div>
-    <div class="col">
-      <%= f.label :cliente_id, "Cliente" %>
-      <%= f.collection_select :cliente_id, @clientes, :id, :nombre, prompt: "Seleccionar", class: "form-control" %>
-    </div>
-  </div>
 
-  <div class="row mt-2">
-    <div class="col">
+    <div class="col-md-3">
+      <%= f.label :cliente_id, "Cliente" %>
+      <%= f.collection_select :cliente_id, @clientes, :id, :nombre, { prompt: "Seleccionar" }, class: "form-select" %>
+    </div>
+
+    <div class="col-md-3">
+      <%= f.label :tipo_obra_id, "Tipo de Obra" %>
+      <%= f.collection_select :tipo_obra_id, @tipos_obra, :id, :nombre, { prompt: "Seleccionar" }, class: "form-select" %>
+    </div>
+
+    <div class="col-md-6">
       <%= f.label :ubicacion %>
       <%= f.text_field :ubicacion, class: "form-control" %>
     </div>
-    <div class="col">
+
+    <div class="col-md-6">
       <%= f.label :plazo_contrato %>
       <%= f.text_field :plazo_contrato, class: "form-control" %>
     </div>
-    <div class="col">
-      <%= f.label :tipo_obra_id, "Tipo de Obra" %>
-      <%= f.collection_select :tipo_obra_id, @tipos_obra, :id, :nombre, prompt: "Seleccionar tipo", class: "form-control" %>
-    </div>
   </div>
 
-  <!-- 🔹 Documentación Técnica -->
   <hr>
-  <h5 class="mt-4">📋 Documentación Técnica</h5>
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead><tr><th>Nombre</th><th class="text-center">Entregado</th></tr></thead>
-      <tbody>
-        <% ['Planta', 'Cortes', 'Vistas', 'Plano Eléctrico', 'Esquema unifilar', 'Planilla de consumos', 'Planta sanitario', 'Plano de agua', '3D'].each_with_index do |nombre, i| %>
-          <tr>
-            <td><%= nombre %></td>
-            <td class="text-center">
-              <%= check_box_tag "proyecto[documentos_proyecto_attributes][#{i}][presente]", true, false %>
-              <%= hidden_field_tag "proyecto[documentos_proyecto_attributes][#{i}][nombre]", nombre %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 🔹 Documentación de Gestión -->
-  <hr>
-  <h5 class="mt-4">📊 Documentación de Gestión</h5>
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead><tr><th>Nombre</th><th class="text-center">Entregado</th></tr></thead>
-      <tbody>
-        <% ['Instructivo de montaje', 'Computo mano de obra', 'Conforme a obra y computo real de materiales', 'Plan de trabajo', 'Control presupuestario, mano de obra y materiales', 'Calculo de estructura'].each_with_index do |nombre, i| %>
-          <tr>
-            <td><%= nombre %></td>
-            <td class="text-center">
-              <%= check_box_tag "proyecto[documentos_proyecto_attributes][#{i + 9}][presente]", true, false %>
-              <%= hidden_field_tag "proyecto[documentos_proyecto_attributes][#{i + 9}][nombre]", nombre %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  <%= render partial: "documentacion_checklist" %>
 
-  <!-- 🔹 Documentación de Producción -->
   <hr>
-  <h5 class="mt-4">🏭 Documentación de Producción</h5>
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead><tr><th>Nombre</th><th class="text-center">Entregado</th></tr></thead>
-      <tbody>
-        <% ['Armado carpeta digital', 'Armado carpeta jefe de taller y jefes de areas', 'Armado planilla producción'].each_with_index do |nombre, i| %>
-          <tr>
-            <td><%= nombre %></td>
-            <td class="text-center">
-              <%= check_box_tag "proyecto[documentos_proyecto_attributes][#{i + 15}][presente]", true, false %>
-              <%= hidden_field_tag "proyecto[documentos_proyecto_attributes][#{i + 15}][nombre]", nombre %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 🔹 Tabla de Órdenes de Servicio -->
-  <hr>
-  <h5 class="mt-4">🛠 Órdenes de Servicio</h5>
+  <h5 class="mt-4">🛠️ Órdenes de Servicio</h5>
   <div id="ordenes-container">
     <%= f.fields_for :proyecto_orden_servicios do |o| %>
-      <div class="row g-2 mb-2 orden-servicio-fields">
-        <div class="col">
-          <%= o.label :orden_servicio_id, "Código de Orden" %>
-          <%= o.collection_select :orden_servicio_id, OrdenServicio.all, :id, :codigo, prompt: "Seleccionar", class: "form-control" %>
-        </div>
-        <div class="col"><%= o.label :sector_id %><%= o.collection_select :sector_id, @sectores, :id, :nombre, prompt: "Sector", class: "form-control" %></div>
-        <div class="col"><%= o.label :subproducto_id %><%= o.collection_select :subproducto_id, @subproductos, :id, :nombre, prompt: "Subproducto", class: "form-control" %></div>
-        <div class="col"><%= o.label :material_id %><%= o.collection_select :material_id, @materiales, :id, :nombre, prompt: "Material", class: "form-control" %></div>
-        <div class="col"><%= o.label :descripcion %><%= o.text_field :descripcion, class: "form-control", placeholder: "Descripción" %></div>
-        <div class="col"><%= o.label :tiempo %><%= o.text_field :tiempo, class: "form-control", placeholder: "Tiempo" %></div>
-        <div class="col-auto d-flex align-items-end">
-          <button type="button" class="btn btn-danger remove-orden">✕</button>
-        </div>
-      </div>
+      <%= render partial: "orden_fields", locals: { f: o, sectores: @sectores, subproductos: @subproductos, materiales: @materiales } %>
     <% end %>
   </div>
 
-  <%= button_tag "+ Agregar Orden", type: :button, id: "add-orden", class: "btn btn-secondary mt-2" %>
+  <%= render partial: "orden_fields_template", locals: { sectores: @sectores, subproductos: @subproductos, materiales: @materiales, ordenes: @ordenes_servicio } %>
 
-  <!-- 🔹 Botón Submit -->
-  <div class="mt-4">
-    <%= f.submit "Guardar Proyecto", class: "btn btn-primary" %>
+  <div class="my-3">
+    <button type="button" id="add-orden" class="btn btn-secondary">+ Agregar Orden</button>
   </div>
 
-  <!-- 🔹 Template oculto -->
-  <template id="orden-template">
-    <div class="row g-2 mb-2 orden-servicio-fields">
-      <div class="col">
-        <label>Código de Orden</label>
-        <select name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][orden_servicio_id]" class="form-control">
-          <option value="">Seleccionar</option>
-          <% OrdenServicio.all.each do |os| %>
-            <option value="<%= os.id %>"><%= os.codigo %></option>
-          <% end %>
-        </select>
-      </div>
-      <div class="col">
-        <label>Sector</label>
-        <select name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][sector_id]" class="form-control">
-          <option value="">Sector</option>
-          <% @sectores.each do |s| %>
-            <option value="<%= s.id %>"><%= s.nombre %></option>
-          <% end %>
-        </select>
-      </div>
-      <div class="col">
-        <label>Subproducto</label>
-        <select name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][subproducto_id]" class="form-control">
-          <option value="">Subproducto</option>
-          <% @subproductos.each do |sp| %>
-            <option value="<%= sp.id %>"><%= sp.nombre %></option>
-          <% end %>
-        </select>
-      </div>
-      <div class="col">
-        <label>Material</label>
-        <select name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][material_id]" class="form-control">
-          <option value="">Material</option>
-          <% @materiales.each do |m| %>
-            <option value="<%= m.id %>"><%= m.nombre %></option>
-          <% end %>
-        </select>
-      </div>
-      <div class="col">
-        <label>Descripción</label>
-        <input type="text" name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][descripcion]" class="form-control" placeholder="Descripción">
-      </div>
-      <div class="col">
-        <label>Tiempo</label>
-        <input type="text" name="proyecto[proyecto_orden_servicios_attributes][NEW_INDEX][tiempo]" class="form-control" placeholder="Tiempo">
-      </div>
-      <div class="col-auto d-flex align-items-end">
-        <button type="button" class="btn btn-danger remove-orden">✕</button>
-      </div>
-    </div>
-  </template>
-<% end %>
-
-
-<%= javascript_tag do %>
-  document.addEventListener("DOMContentLoaded", () => {
-    const addBtn = document.getElementById("add-orden");
-    const container = document.getElementById("ordenes-container");
-    const template = document.getElementById("orden-template");
-
-    addBtn.addEventListener("click", () => {
-      const time = new Date().getTime();
-      const clone = template.content.cloneNode(true);
-
-      clone.querySelectorAll("[name]").forEach((el) => {
-        if (el.name && el.name.includes("NEW_RECORD")) {
-          el.name = el.name.replace(/NEW_RECORD/g, time);
-        }
-      });
-
-      container.appendChild(clone);
-    });
-
-    document.addEventListener("click", (e) => {
-      if (e.target && e.target.classList.contains("remove-orden")) {
-        e.preventDefault();
-        e.target.closest(".orden-servicio-fields").remove();
-      }
-    });
-  });
+  <%= f.submit "Guardar Proyecto", class: "btn btn-primary" %>
 <% end %>
