@@ -1,14 +1,33 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Escala salarials</h1>
-
-<div id="escala_salarials">
-  <% @escala_salarials.each do |escala_salarial| %>
-    <%= render escala_salarial %>
-    <p>
-      <%= link_to "Show this escala salarial", escala_salarial %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Escalas Salariales</h1>
+  <%= link_to 'Nueva Escala', new_escala_salarial_path, class: 'btn btn-success' %>
 </div>
 
-<%= link_to "New escala salarial", new_escala_salarial_path %>
+<% if @escala_salarials.any? %>
+  <table class="table table-bordered table-striped align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Categoría</th>
+        <th>Sueldo Base</th>
+        <th>Observaciones</th>
+        <th class="text-end">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @escala_salarials.each do |escala| %>
+        <tr>
+          <td><%= escala.categoria %></td>
+          <td><%= escala.sueldo_base %></td>
+          <td><%= escala.observaciones %></td>
+          <td class="text-end">
+            <%= link_to 'Ver', escala, class: 'btn btn-sm btn-outline-primary me-1' %>
+            <%= link_to 'Editar', edit_escala_salarial_path(escala), class: 'btn btn-sm btn-outline-secondary me-1' %>
+            <%= link_to 'Eliminar', escala, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-sm btn-outline-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-secondary text-center">No hay escalas registradas.</div>
+<% end %>

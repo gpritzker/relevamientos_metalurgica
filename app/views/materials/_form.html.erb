@@ -1,8 +1,7 @@
-<%= form_with(model: material) do |form| %>
+<%= form_with(model: material, local: true) do |form| %>
   <% if material.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(material.errors.count, "error") %> prohibited this material from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h5><%= pluralize(material.errors.count, "error") %> impidieron guardar el material:</h5>
       <ul>
         <% material.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,32 +10,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :nombre, style: "display: block" %>
-    <%= form.text_field :nombre %>
+  <div class="mb-3">
+    <%= form.label :nombre, class: "form-label" %>
+    <%= form.text_field :nombre, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :unidad, style: "display: block" %>
-    <%= form.text_field :unidad %>
+  <div class="mb-3">
+    <%= form.label :unidad, class: "form-label" %>
+    <%= form.text_field :unidad, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :stock_actual, style: "display: block" %>
-    <%= form.number_field :stock_actual %>
+  <div class="mb-3">
+    <%= form.label :stock_actual, class: "form-label" %>
+    <%= form.number_field :stock_actual, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :stock_minimo, style: "display: block" %>
-    <%= form.number_field :stock_minimo %>
+  <div class="mb-3">
+    <%= form.label :stock_minimo, class: "form-label" %>
+    <%= form.number_field :stock_minimo, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :observaciones, style: "display: block" %>
-    <%= form.text_area :observaciones %>
+  <div class="mb-3">
+    <%= form.label :observaciones, class: "form-label" %>
+    <%= form.text_area :observaciones, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-end">
+    <%= form.submit material.new_record? ? "Crear Material" : "Actualizar Material", class: "btn btn-primary" %>
   </div>
 <% end %>

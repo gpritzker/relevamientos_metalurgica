@@ -1,8 +1,7 @@
-<%= form_with(model: no_conformidad) do |form| %>
+<%= form_with(model: no_conformidad, local: true) do |form| %>
   <% if no_conformidad.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(no_conformidad.errors.count, "error") %> prohibited this no_conformidad from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h5><%= pluralize(no_conformidad.errors.count, "error") %> impidieron guardar la no conformidad:</h5>
       <ul>
         <% no_conformidad.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,27 +10,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :detalle_produccion_id, style: "display: block" %>
-    <%= form.text_field :detalle_produccion_id %>
+  <div class="mb-3">
+    <%= form.label :detalle_produccion_id, class: "form-label" %>
+    <%= form.text_field :detalle_produccion_id, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :motivo, style: "display: block" %>
-    <%= form.text_field :motivo %>
+  <div class="mb-3">
+    <%= form.label :motivo, class: "form-label" %>
+    <%= form.text_field :motivo, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :cantidad_afectada, style: "display: block" %>
-    <%= form.number_field :cantidad_afectada %>
+  <div class="mb-3">
+    <%= form.label :cantidad_afectada, class: "form-label" %>
+    <%= form.number_field :cantidad_afectada, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :observaciones, style: "display: block" %>
-    <%= form.text_area :observaciones %>
+  <div class="mb-3">
+    <%= form.label :observaciones, class: "form-label" %>
+    <%= form.text_area :observaciones, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-end">
+    <%= form.submit no_conformidad.new_record? ? "Crear No Conformidad" : "Actualizar No Conformidad", class: "btn btn-primary" %>
   </div>
 <% end %>

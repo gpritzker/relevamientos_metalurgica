@@ -1,8 +1,7 @@
-<%= form_with(model: parte_produccion) do |form| %>
+<%= form_with(model: parte_produccion, local: true) do |form| %>
   <% if parte_produccion.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(parte_produccion.errors.count, "error") %> prohibited this parte_produccion from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h5><%= pluralize(parte_produccion.errors.count, "error") %> impidieron guardar el parte:</h5>
       <ul>
         <% parte_produccion.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,32 +10,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :operario_id, style: "display: block" %>
-    <%= form.text_field :operario_id %>
+  <div class="mb-3">
+    <%= form.label :operario_id, class: "form-label" %>
+    <%= form.text_field :operario_id, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :orden_servicio_id, style: "display: block" %>
-    <%= form.text_field :orden_servicio_id %>
+  <div class="mb-3">
+    <%= form.label :orden_servicio_id, class: "form-label" %>
+    <%= form.text_field :orden_servicio_id, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :fecha, style: "display: block" %>
-    <%= form.date_field :fecha %>
+  <div class="mb-3">
+    <%= form.label :fecha, class: "form-label" %>
+    <%= form.date_field :fecha, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :jornada_laboral, style: "display: block" %>
-    <%= form.number_field :jornada_laboral %>
+  <div class="mb-3">
+    <%= form.label :jornada_laboral, class: "form-label" %>
+    <%= form.number_field :jornada_laboral, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :observaciones, style: "display: block" %>
-    <%= form.text_area :observaciones %>
+  <div class="mb-3">
+    <%= form.label :observaciones, class: "form-label" %>
+    <%= form.text_area :observaciones, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-end">
+    <%= form.submit parte_produccion.new_record? ? "Crear Parte" : "Actualizar Parte", class: "btn btn-primary" %>
   </div>
 <% end %>
