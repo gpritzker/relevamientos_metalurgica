@@ -1,8 +1,7 @@
-<%= form_with(model: escala_salarial) do |form| %>
+<%= form_with(model: escala_salarial, local: true) do |form| %>
   <% if escala_salarial.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(escala_salarial.errors.count, "error") %> prohibited this escala_salarial from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h5><%= pluralize(escala_salarial.errors.count, "error") %> impidieron guardar la escala:</h5>
       <ul>
         <% escala_salarial.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,22 +10,22 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :categoria, style: "display: block" %>
-    <%= form.text_field :categoria %>
+  <div class="mb-3">
+    <%= form.label :categoria, class: "form-label" %>
+    <%= form.text_field :categoria, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :sueldo_base, style: "display: block" %>
-    <%= form.text_field :sueldo_base %>
+  <div class="mb-3">
+    <%= form.label :sueldo_base, class: "form-label" %>
+    <%= form.text_field :sueldo_base, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :observaciones, style: "display: block" %>
-    <%= form.text_area :observaciones %>
+  <div class="mb-3">
+    <%= form.label :observaciones, class: "form-label" %>
+    <%= form.text_area :observaciones, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-end">
+    <%= form.submit escala_salarial.new_record? ? "Crear Escala" : "Actualizar Escala", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,8 +1,7 @@
-<%= form_with(model: retrabajo) do |form| %>
+<%= form_with(model: retrabajo, local: true) do |form| %>
   <% if retrabajo.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(retrabajo.errors.count, "error") %> prohibited this retrabajo from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h5><%= pluralize(retrabajo.errors.count, "error") %> impidieron guardar el retrabajo:</h5>
       <ul>
         <% retrabajo.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,22 +10,22 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :detalle_produccion_id, style: "display: block" %>
-    <%= form.text_field :detalle_produccion_id %>
+  <div class="mb-3">
+    <%= form.label :detalle_produccion_id, class: "form-label" %>
+    <%= form.text_field :detalle_produccion_id, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :motivo, style: "display: block" %>
-    <%= form.text_field :motivo %>
+  <div class="mb-3">
+    <%= form.label :motivo, class: "form-label" %>
+    <%= form.text_field :motivo, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :descripcion, style: "display: block" %>
-    <%= form.text_area :descripcion %>
+  <div class="mb-3">
+    <%= form.label :descripcion, class: "form-label" %>
+    <%= form.text_area :descripcion, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-end">
+    <%= form.submit retrabajo.new_record? ? "Crear Retrabajo" : "Actualizar Retrabajo", class: "btn btn-primary" %>
   </div>
 <% end %>

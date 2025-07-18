@@ -1,8 +1,7 @@
-<%= form_with(model: tipo_orden_servicio) do |form| %>
+<%= form_with(model: tipo_orden_servicio, local: true) do |form| %>
   <% if tipo_orden_servicio.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(tipo_orden_servicio.errors.count, "error") %> prohibited this tipo_orden_servicio from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h5><%= pluralize(tipo_orden_servicio.errors.count, "error") %> impidieron guardar el tipo de orden:</h5>
       <ul>
         <% tipo_orden_servicio.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,12 +10,12 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :nombre, style: "display: block" %>
-    <%= form.text_field :nombre %>
+  <div class="mb-3">
+    <%= form.label :nombre, class: "form-label" %>
+    <%= form.text_field :nombre, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-end">
+    <%= form.submit tipo_orden_servicio.new_record? ? "Crear Tipo de Orden" : "Actualizar Tipo de Orden", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,14 +1,29 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Tipo orden servicios</h1>
-
-<div id="tipo_orden_servicios">
-  <% @tipo_orden_servicios.each do |tipo_orden_servicio| %>
-    <%= render tipo_orden_servicio %>
-    <p>
-      <%= link_to "Show this tipo orden servicio", tipo_orden_servicio %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Tipos de Orden de Servicio</h1>
+  <%= link_to 'Nuevo Tipo', new_tipo_orden_servicio_path, class: 'btn btn-success' %>
 </div>
 
-<%= link_to "New tipo orden servicio", new_tipo_orden_servicio_path %>
+<% if @tipo_orden_servicios.any? %>
+  <table class="table table-bordered table-striped align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Nombre</th>
+        <th class="text-end">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tipo_orden_servicios.each do |tipo| %>
+        <tr>
+          <td><%= tipo.nombre %></td>
+          <td class="text-end">
+            <%= link_to 'Ver', tipo, class: 'btn btn-sm btn-outline-primary me-1' %>
+            <%= link_to 'Editar', edit_tipo_orden_servicio_path(tipo), class: 'btn btn-sm btn-outline-secondary me-1' %>
+            <%= link_to 'Eliminar', tipo, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-sm btn-outline-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-secondary text-center">No hay tipos de orden registrados.</div>
+<% end %>

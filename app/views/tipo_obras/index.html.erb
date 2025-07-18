@@ -1,14 +1,29 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Tipo obras</h1>
-
-<div id="tipo_obras">
-  <% @tipo_obras.each do |tipo_obra| %>
-    <%= render tipo_obra %>
-    <p>
-      <%= link_to "Show this tipo obra", tipo_obra %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Tipos de Obra</h1>
+  <%= link_to 'Nuevo Tipo de Obra', new_tipo_obra_path, class: 'btn btn-success' %>
 </div>
 
-<%= link_to "New tipo obra", new_tipo_obra_path %>
+<% if @tipo_obras.any? %>
+  <table class="table table-bordered table-striped align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Nombre</th>
+        <th class="text-end">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tipo_obras.each do |tipo_obra| %>
+        <tr>
+          <td><%= tipo_obra.nombre %></td>
+          <td class="text-end">
+            <%= link_to 'Ver', tipo_obra, class: 'btn btn-sm btn-outline-primary me-1' %>
+            <%= link_to 'Editar', edit_tipo_obra_path(tipo_obra), class: 'btn btn-sm btn-outline-secondary me-1' %>
+            <%= link_to 'Eliminar', tipo_obra, method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-sm btn-outline-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-secondary text-center">No hay tipos de obra registrados.</div>
+<% end %>

@@ -1,8 +1,7 @@
-<%= form_with(model: documento_proyecto) do |form| %>
+<%= form_with(model: documento_proyecto, local: true) do |form| %>
   <% if documento_proyecto.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(documento_proyecto.errors.count, "error") %> prohibited this documento_proyecto from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h5><%= pluralize(documento_proyecto.errors.count, "error") %> impidieron guardar el documento:</h5>
       <ul>
         <% documento_proyecto.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,27 +10,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :proyecto_id, style: "display: block" %>
-    <%= form.text_field :proyecto_id %>
+  <div class="mb-3">
+    <%= form.label :proyecto_id, class: "form-label" %>
+    <%= form.text_field :proyecto_id, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :nombre, style: "display: block" %>
-    <%= form.text_field :nombre %>
+  <div class="mb-3">
+    <%= form.label :nombre, class: "form-label" %>
+    <%= form.text_field :nombre, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :presente, style: "display: block" %>
-    <%= form.check_box :presente %>
+  <div class="form-check mb-3">
+    <%= form.check_box :presente, class: "form-check-input" %>
+    <%= form.label :presente, class: "form-check-label" %>
   </div>
 
-  <div>
-    <%= form.label :observaciones, style: "display: block" %>
-    <%= form.text_area :observaciones %>
+  <div class="mb-3">
+    <%= form.label :observaciones, class: "form-label" %>
+    <%= form.text_area :observaciones, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-end">
+    <%= form.submit documento_proyecto.new_record? ? "Crear Documento" : "Actualizar Documento", class: "btn btn-primary" %>
   </div>
 <% end %>
