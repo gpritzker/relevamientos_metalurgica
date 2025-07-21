@@ -12,7 +12,7 @@ class ProyectosTest < ApplicationSystemTestCase
 
   test "should create proyecto" do
     visit proyectos_url
-    click_on "New proyecto"
+    click_on "➕ Crear Proyecto"
 
     fill_in "Cliente", with: @proyecto.cliente_id
     fill_in "Documentacion", with: @proyecto.documentacion
@@ -20,15 +20,15 @@ class ProyectosTest < ApplicationSystemTestCase
     fill_in "Plazo contrato", with: @proyecto.plazo_contrato
     fill_in "Tipo obra", with: @proyecto.tipo_obra_id
     fill_in "Ubicacion", with: @proyecto.ubicacion
-    click_on "Create Proyecto"
+    click_on "Crear Proyecto"
 
-    assert_text "Proyecto was successfully created"
-    click_on "Back"
+    assert_text "Proyecto creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Proyecto" do
     visit proyecto_url(@proyecto)
-    click_on "Edit this proyecto", match: :first
+    click_on "Editar este proyecto", match: :first
 
     fill_in "Cliente", with: @proyecto.cliente_id
     fill_in "Documentacion", with: @proyecto.documentacion
@@ -36,16 +36,16 @@ class ProyectosTest < ApplicationSystemTestCase
     fill_in "Plazo contrato", with: @proyecto.plazo_contrato
     fill_in "Tipo obra", with: @proyecto.tipo_obra_id
     fill_in "Ubicacion", with: @proyecto.ubicacion
-    click_on "Update Proyecto"
+    click_on "Actualizar Proyecto"
 
-    assert_text "Proyecto was successfully updated"
-    click_on "Back"
+    assert_text "Proyecto actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Proyecto" do
     visit proyecto_url(@proyecto)
-    click_on "Destroy this proyecto", match: :first
+    click_on "Eliminar este proyecto", match: :first
 
-    assert_text "Proyecto was successfully destroyed"
+    assert_text "Proyecto eliminado correctamente"
   end
 end

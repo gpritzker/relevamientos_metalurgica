@@ -12,7 +12,7 @@ class TareaRealizadasTest < ApplicationSystemTestCase
 
   test "should create tarea realizada" do
     visit tarea_realizadas_url
-    click_on "New tarea realizada"
+    click_on "Nueva Tarea Realizada"
 
     fill_in "Cantidad ejecutada", with: @tarea_realizada.cantidad_ejecutada
     fill_in "Descripcion", with: @tarea_realizada.descripcion
@@ -24,15 +24,15 @@ class TareaRealizadasTest < ApplicationSystemTestCase
     fill_in "Observaciones", with: @tarea_realizada.observaciones
     fill_in "Parte diario", with: @tarea_realizada.parte_diario_id
     fill_in "Tarea realizada", with: @tarea_realizada.tarea_realizada
-    click_on "Create Tarea realizada"
+    click_on "Crear Tarea realizada"
 
-    assert_text "Tarea realizada was successfully created"
-    click_on "Back"
+    assert_text "Tarea realizada creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Tarea realizada" do
     visit tarea_realizada_url(@tarea_realizada)
-    click_on "Edit this tarea realizada", match: :first
+    click_on "Editar este tarea realizada", match: :first
 
     fill_in "Cantidad ejecutada", with: @tarea_realizada.cantidad_ejecutada
     fill_in "Descripcion", with: @tarea_realizada.descripcion
@@ -44,16 +44,16 @@ class TareaRealizadasTest < ApplicationSystemTestCase
     fill_in "Observaciones", with: @tarea_realizada.observaciones
     fill_in "Parte diario", with: @tarea_realizada.parte_diario_id
     fill_in "Tarea realizada", with: @tarea_realizada.tarea_realizada
-    click_on "Update Tarea realizada"
+    click_on "Actualizar Tarea realizada"
 
-    assert_text "Tarea realizada was successfully updated"
-    click_on "Back"
+    assert_text "Tarea realizada actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Tarea realizada" do
     visit tarea_realizada_url(@tarea_realizada)
-    click_on "Destroy this tarea realizada", match: :first
+    click_on "Eliminar este tarea realizada", match: :first
 
-    assert_text "Tarea realizada was successfully destroyed"
+    assert_text "Tarea realizada eliminado correctamente"
   end
 end

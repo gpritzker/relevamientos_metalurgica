@@ -25,7 +25,7 @@ class SubproductosController < ApplicationController
 
     respond_to do |format|
       if @subproducto.save
-        format.html { redirect_to @subproducto, notice: "Subproducto was successfully created." }
+        format.html { redirect_to @subproducto, notice: t("flash.created", model: "Subproducto") }
         format.json { render :show, status: :created, location: @subproducto }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class SubproductosController < ApplicationController
   def update
     respond_to do |format|
       if @subproducto.update(subproducto_params)
-        format.html { redirect_to @subproducto, notice: "Subproducto was successfully updated." }
+        format.html { redirect_to @subproducto, notice: t("flash.updated", model: "Subproducto") }
         format.json { render :show, status: :ok, location: @subproducto }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class SubproductosController < ApplicationController
     @subproducto.destroy!
 
     respond_to do |format|
-      format.html { redirect_to subproductos_path, status: :see_other, notice: "Subproducto was successfully destroyed." }
+      format.html { redirect_to subproductos_path, status: :see_other, notice: t("flash.destroyed", model: "Subproducto") }
       format.json { head :no_content }
     end
   end

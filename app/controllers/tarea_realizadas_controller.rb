@@ -54,7 +54,7 @@ class TareaRealizadasController < ApplicationController
     @tarea_realizada.destroy!
 
     respond_to do |format|
-      format.html { redirect_to tarea_realizadas_path, status: :see_other, notice: "Tarea realizada was successfully destroyed." }
+      format.html { redirect_to tarea_realizadas_path, status: :see_other, notice: t("flash.destroyed", model: "Tarea realizada") }
       format.json { head :no_content }
     end
   end

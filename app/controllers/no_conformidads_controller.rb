@@ -25,7 +25,7 @@ class NoConformidadsController < ApplicationController
 
     respond_to do |format|
       if @no_conformidad.save
-        format.html { redirect_to @no_conformidad, notice: "No conformidad was successfully created." }
+        format.html { redirect_to @no_conformidad, notice: t("flash.created", model: "No conformidad") }
         format.json { render :show, status: :created, location: @no_conformidad }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class NoConformidadsController < ApplicationController
   def update
     respond_to do |format|
       if @no_conformidad.update(no_conformidad_params)
-        format.html { redirect_to @no_conformidad, notice: "No conformidad was successfully updated." }
+        format.html { redirect_to @no_conformidad, notice: t("flash.updated", model: "No conformidad") }
         format.json { render :show, status: :ok, location: @no_conformidad }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class NoConformidadsController < ApplicationController
     @no_conformidad.destroy!
 
     respond_to do |format|
-      format.html { redirect_to no_conformidads_path, status: :see_other, notice: "No conformidad was successfully destroyed." }
+      format.html { redirect_to no_conformidads_path, status: :see_other, notice: t("flash.destroyed", model: "No conformidad") }
       format.json { head :no_content }
     end
   end

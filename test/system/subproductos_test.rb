@@ -12,34 +12,34 @@ class SubproductosTest < ApplicationSystemTestCase
 
   test "should create subproducto" do
     visit subproductos_url
-    click_on "New subproducto"
+    click_on "Nuevo Subproducto"
 
     fill_in "Area", with: @subproducto.sector_id
     fill_in "Nombre", with: @subproducto.nombre
     fill_in "Producto", with: @subproducto.producto_id
-    click_on "Create Subproducto"
+    click_on "Crear Subproducto"
 
-    assert_text "Subproducto was successfully created"
-    click_on "Back"
+    assert_text "Subproducto creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Subproducto" do
     visit subproducto_url(@subproducto)
-    click_on "Edit this subproducto", match: :first
+    click_on "Editar este subproducto", match: :first
 
     fill_in "Area", with: @subproducto.sector_id
     fill_in "Nombre", with: @subproducto.nombre
     fill_in "Producto", with: @subproducto.producto_id
-    click_on "Update Subproducto"
+    click_on "Actualizar Subproducto"
 
-    assert_text "Subproducto was successfully updated"
-    click_on "Back"
+    assert_text "Subproducto actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Subproducto" do
     visit subproducto_url(@subproducto)
-    click_on "Destroy this subproducto", match: :first
+    click_on "Eliminar este subproducto", match: :first
 
-    assert_text "Subproducto was successfully destroyed"
+    assert_text "Subproducto eliminado correctamente"
   end
 end

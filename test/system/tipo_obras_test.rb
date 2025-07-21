@@ -12,30 +12,30 @@ class TipoObrasTest < ApplicationSystemTestCase
 
   test "should create tipo obra" do
     visit tipo_obras_url
-    click_on "New tipo obra"
+    click_on "Nuevo Tipo de Obra"
 
     fill_in "Nombre", with: @tipo_obra.nombre
-    click_on "Create Tipo obra"
+    click_on "Crear Tipo obra"
 
-    assert_text "Tipo obra was successfully created"
-    click_on "Back"
+    assert_text "Tipo obra creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Tipo obra" do
     visit tipo_obra_url(@tipo_obra)
-    click_on "Edit this tipo obra", match: :first
+    click_on "Editar este tipo obra", match: :first
 
     fill_in "Nombre", with: @tipo_obra.nombre
-    click_on "Update Tipo obra"
+    click_on "Actualizar Tipo obra"
 
-    assert_text "Tipo obra was successfully updated"
-    click_on "Back"
+    assert_text "Tipo obra actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Tipo obra" do
     visit tipo_obra_url(@tipo_obra)
-    click_on "Destroy this tipo obra", match: :first
+    click_on "Eliminar este tipo obra", match: :first
 
-    assert_text "Tipo obra was successfully destroyed"
+    assert_text "Tipo obra eliminado correctamente"
   end
 end

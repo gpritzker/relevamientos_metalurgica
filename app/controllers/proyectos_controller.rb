@@ -35,7 +35,7 @@ class ProyectosController < ApplicationController
 
     respond_to do |format|
       if @proyecto.save
-        format.html { redirect_to @proyecto, notice: "Proyecto was successfully created." }
+        format.html { redirect_to @proyecto, notice: t("flash.created", model: "Proyecto") }
         format.json { render :show, status: :created, location: @proyecto }
       else
         @clientes = Cliente.all
@@ -56,7 +56,7 @@ class ProyectosController < ApplicationController
   def update
     respond_to do |format|
       if @proyecto.update(proyecto_params)
-        format.html { redirect_to @proyecto, notice: "Proyecto was successfully updated." }
+        format.html { redirect_to @proyecto, notice: t("flash.updated", model: "Proyecto") }
         format.json { render :show, status: :ok, location: @proyecto }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -70,7 +70,7 @@ class ProyectosController < ApplicationController
     @proyecto.destroy!
 
     respond_to do |format|
-      format.html { redirect_to proyectos_path, status: :see_other, notice: "Proyecto was successfully destroyed." }
+      format.html { redirect_to proyectos_path, status: :see_other, notice: t("flash.destroyed", model: "Proyecto") }
       format.json { head :no_content }
     end
   end

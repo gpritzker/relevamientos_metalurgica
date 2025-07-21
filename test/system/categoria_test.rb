@@ -12,32 +12,32 @@ class CategoriaTest < ApplicationSystemTestCase
 
   test "should create categorium" do
     visit categoria_url
-    click_on "New categorium"
+    click_on "Nueva Categoría"
 
     fill_in "Descripcion", with: @categorium.descripcion
     fill_in "Nombre", with: @categorium.nombre
-    click_on "Create Categorium"
+    click_on "Crear Categorium"
 
-    assert_text "Categorium was successfully created"
-    click_on "Back"
+    assert_text "Categorium creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Categorium" do
     visit categorium_url(@categorium)
-    click_on "Edit this categorium", match: :first
+    click_on "Editar este categorium", match: :first
 
     fill_in "Descripcion", with: @categorium.descripcion
     fill_in "Nombre", with: @categorium.nombre
-    click_on "Update Categorium"
+    click_on "Actualizar Categorium"
 
-    assert_text "Categorium was successfully updated"
-    click_on "Back"
+    assert_text "Categorium actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Categorium" do
     visit categorium_url(@categorium)
-    click_on "Destroy this categorium", match: :first
+    click_on "Eliminar este categorium", match: :first
 
-    assert_text "Categorium was successfully destroyed"
+    assert_text "Categorium eliminado correctamente"
   end
 end

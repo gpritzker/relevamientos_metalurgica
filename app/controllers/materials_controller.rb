@@ -25,7 +25,7 @@ class MaterialsController < ApplicationController
 
     respond_to do |format|
       if @material.save
-        format.html { redirect_to @material, notice: "Material was successfully created." }
+        format.html { redirect_to @material, notice: t("flash.created", model: "Material") }
         format.json { render :show, status: :created, location: @material }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class MaterialsController < ApplicationController
   def update
     respond_to do |format|
       if @material.update(material_params)
-        format.html { redirect_to @material, notice: "Material was successfully updated." }
+        format.html { redirect_to @material, notice: t("flash.updated", model: "Material") }
         format.json { render :show, status: :ok, location: @material }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class MaterialsController < ApplicationController
     @material.destroy!
 
     respond_to do |format|
-      format.html { redirect_to materials_path, status: :see_other, notice: "Material was successfully destroyed." }
+      format.html { redirect_to materials_path, status: :see_other, notice: t("flash.destroyed", model: "Material") }
       format.json { head :no_content }
     end
   end
