@@ -203,5 +203,62 @@ end
 
 puts "✔ Operarios de Patagonia creados: #{operarios_patagonia.size}"
 
+sectores = %w[
+  CORTE PLEGADO INYECTADO CARPINTERIA PINTURA CONFORMADO MONTAJE
+]
+
+puts "Creando sectores únicos..."
+
+sectores.each do |nombre|
+  Sector.find_or_create_by!(nombre: nombre.titleize)
+end
+
+puts "Seed completado con #{sectores.size} sectores"
+
+# db/seeds/subproductos_seed.rb
+producto = Producto.find_or_create_by!(nombre: "Producto genérico")
+sector = Sector.find_or_create_by!(nombre: "Sin asignar")
+
+subproductos = %w[
+  AIRE
+  CHASIS
+  CIERRE\ EXTERIOR
+  CIERRE\ INTERIOR
+  COLUMNA\ modificado
+  DUCHA
+  ESQUINEROS
+  ESQUINEROS\ modificado
+  MARCO
+  MUEBLE
+  PANEL\ DE\ DUCHA
+  PANELES
+  PANELES\ "Z"\ INTERIORES
+  PANELES\ INTERIORES
+  PANELES\ Modificada
+  PERFIL\ INFERIOR
+  PERFILES
+  PISO
+  PREMARCO
+  PUERTA
+  RECEPTACULO
+  SERVICIOS
+  TECHO
+  U\ CIERRE
+  U\ CIERRE\ Modificada
+  U\ COMUN\ Modificada
+  VENTANA
+]
+
+puts "Creando subproductos únicos con producto_id: #{producto.id} y sector_id: #{sector.id}..."
+
+subproductos.each do |nombre|
+  Subproducto.find_or_create_by!(
+    nombre: nombre,
+    producto_id: producto.id,
+    sector_id: sector.id
+  )
+end
+
+puts "✔️ Seed completado con #{subproductos.size} subproductos"
 
 puts "🌱 Seeding completo."

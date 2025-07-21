@@ -52,7 +52,7 @@
         <select class="form-control" name="parte_produccion[detalle_produccions_attributes][NEW_RECORD][orden_servicio_id]" id="parte_produccion_detalle_produccions_attributes_NEW_RECORD_orden_servicio_id">
           <option value="">Seleccionar ODS</option>
           <% @ordenes_servicio.each do |ods| %>
-            <option value="<%= ods.id %>"><%= ods.descripcion %></option>
+            <option value="<%= ods.id %>"><%= ods.codigo %></option>
           <% end %>
         </select>
       </td>

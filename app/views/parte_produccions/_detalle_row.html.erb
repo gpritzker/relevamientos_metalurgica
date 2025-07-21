@@ -2,7 +2,7 @@
   <td><%= f.text_field :componente, class: "form-control", placeholder: "Ítem" %></td>
   <td><%= f.text_field :descripcion, class: "form-control" %></td>
   <td>
-   <%= f.select :orden_servicio_id, ordenes_servicio.map { |os| [ "#{os.proyecto.nombre} - #{os.tipo_orden_servicio.nombre}", os.id ] }, { prompt: "Seleccionar ODS" }, class: "form-control" %>
+   <%= f.select :orden_servicio_id, ordenes_servicio.map { |os| [ "#{os.codigo}", os.id ] }, { prompt: "Seleccionar ODS" }, class: "form-control" %>
   </td>
   <td><%= f.number_field :cantidad_a_ejecutar, class: "form-control" %></td>
   <td><%= f.number_field :cantidad_ejecutada, class: "form-control" %></td>
