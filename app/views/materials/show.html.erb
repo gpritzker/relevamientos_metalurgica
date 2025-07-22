@@ -3,8 +3,8 @@
 <%= render @material %>
 
 <div>
-  <%= link_to "Edit this material", edit_material_path(@material) %> |
-  <%= link_to "Back to materials", materials_path %>
+  <%= link_to "Editar material", edit_material_path(@material) %> |
+  <%= link_to "Volver a materials", materials_path %>
 
-  <%= button_to "Destroy this material", @material, method: :delete %>
+  <%= button_to "Eliminar material", @material, method: :delete %>
 </div>

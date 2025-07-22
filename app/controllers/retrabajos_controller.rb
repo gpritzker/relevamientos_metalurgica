@@ -25,7 +25,7 @@ class RetrabajosController < ApplicationController
 
     respond_to do |format|
       if @retrabajo.save
-        format.html { redirect_to @retrabajo, notice: "Retrabajo was successfully created." }
+        format.html { redirect_to @retrabajo, notice: "Retrabajo creado correctamente." }
         format.json { render :show, status: :created, location: @retrabajo }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class RetrabajosController < ApplicationController
   def update
     respond_to do |format|
       if @retrabajo.update(retrabajo_params)
-        format.html { redirect_to @retrabajo, notice: "Retrabajo was successfully updated." }
+        format.html { redirect_to @retrabajo, notice: "Retrabajo actualizado correctamente." }
         format.json { render :show, status: :ok, location: @retrabajo }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class RetrabajosController < ApplicationController
     @retrabajo.destroy!
 
     respond_to do |format|
-      format.html { redirect_to retrabajos_path, status: :see_other, notice: "Retrabajo was successfully destroyed." }
+      format.html { redirect_to retrabajos_path, status: :see_other, notice: "Retrabajo eliminado correctamente." }
       format.json { head :no_content }
     end
   end

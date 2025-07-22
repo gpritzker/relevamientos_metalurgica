@@ -62,7 +62,7 @@ class ParteProduccionsController < ApplicationController
   def update
     respond_to do |format|
       if @parte_produccion.update(parte_produccion_params)
-        format.html { redirect_to @parte_produccion, notice: "Parte produccion was successfully updated." }
+        format.html { redirect_to @parte_produccion, notice: "Parte produccion actualizado correctamente." }
         format.json { render :show, status: :ok, location: @parte_produccion }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -76,7 +76,7 @@ class ParteProduccionsController < ApplicationController
     @parte_produccion.destroy!
 
     respond_to do |format|
-      format.html { redirect_to parte_produccions_path, status: :see_other, notice: "Parte produccion was successfully destroyed." }
+      format.html { redirect_to parte_produccions_path, status: :see_other, notice: "Parte produccion eliminado correctamente." }
       format.json { head :no_content }
     end
   end

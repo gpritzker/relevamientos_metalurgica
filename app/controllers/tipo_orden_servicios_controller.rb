@@ -25,7 +25,7 @@ class TipoOrdenServiciosController < ApplicationController
 
     respond_to do |format|
       if @tipo_orden_servicio.save
-        format.html { redirect_to @tipo_orden_servicio, notice: "Tipo orden servicio was successfully created." }
+        format.html { redirect_to @tipo_orden_servicio, notice: "Tipo orden servicio creado correctamente." }
         format.json { render :show, status: :created, location: @tipo_orden_servicio }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TipoOrdenServiciosController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_orden_servicio.update(tipo_orden_servicio_params)
-        format.html { redirect_to @tipo_orden_servicio, notice: "Tipo orden servicio was successfully updated." }
+        format.html { redirect_to @tipo_orden_servicio, notice: "Tipo orden servicio actualizado correctamente." }
         format.json { render :show, status: :ok, location: @tipo_orden_servicio }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class TipoOrdenServiciosController < ApplicationController
     @tipo_orden_servicio.destroy!
 
     respond_to do |format|
-      format.html { redirect_to tipo_orden_servicios_path, status: :see_other, notice: "Tipo orden servicio was successfully destroyed." }
+      format.html { redirect_to tipo_orden_servicios_path, status: :see_other, notice: "Tipo orden servicio eliminado correctamente." }
       format.json { head :no_content }
     end
   end

@@ -25,7 +25,7 @@ class DetalleProduccionsController < ApplicationController
 
     respond_to do |format|
       if @detalle_produccion.save
-        format.html { redirect_to @detalle_produccion, notice: "Detalle produccion was successfully created." }
+        format.html { redirect_to @detalle_produccion, notice: "Detalle produccion creado correctamente." }
         format.json { render :show, status: :created, location: @detalle_produccion }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class DetalleProduccionsController < ApplicationController
   def update
     respond_to do |format|
       if @detalle_produccion.update(detalle_produccion_params)
-        format.html { redirect_to @detalle_produccion, notice: "Detalle produccion was successfully updated." }
+        format.html { redirect_to @detalle_produccion, notice: "Detalle produccion actualizado correctamente." }
         format.json { render :show, status: :ok, location: @detalle_produccion }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class DetalleProduccionsController < ApplicationController
     @detalle_produccion.destroy!
 
     respond_to do |format|
-      format.html { redirect_to detalle_produccions_path, status: :see_other, notice: "Detalle produccion was successfully destroyed." }
+      format.html { redirect_to detalle_produccions_path, status: :see_other, notice: "Detalle produccion eliminado correctamente." }
       format.json { head :no_content }
     end
   end

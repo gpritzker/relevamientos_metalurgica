@@ -30,7 +30,7 @@ class OrdenServiciosController < ApplicationController
 
     respond_to do |format|
       if @orden_servicio.save
-        format.html { redirect_to @orden_servicio, notice: "Orden servicio was successfully created." }
+        format.html { redirect_to @orden_servicio, notice: "Orden servicio creado correctamente." }
         format.json { render :show, status: :created, location: @orden_servicio }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class OrdenServiciosController < ApplicationController
   def update
     respond_to do |format|
       if @orden_servicio.update(orden_servicio_params)
-        format.html { redirect_to @orden_servicio, notice: "Orden servicio was successfully updated." }
+        format.html { redirect_to @orden_servicio, notice: "Orden servicio actualizado correctamente." }
         format.json { render :show, status: :ok, location: @orden_servicio }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class OrdenServiciosController < ApplicationController
     @orden_servicio.destroy!
 
     respond_to do |format|
-      format.html { redirect_to orden_servicios_path, status: :see_other, notice: "Orden servicio was successfully destroyed." }
+      format.html { redirect_to orden_servicios_path, status: :see_other, notice: "Orden servicio eliminado correctamente." }
       format.json { head :no_content }
     end
   end
