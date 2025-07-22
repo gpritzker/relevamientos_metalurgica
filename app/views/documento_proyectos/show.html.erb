@@ -3,8 +3,8 @@
 <%= render @documento_proyecto %>
 
 <div>
-  <%= link_to "Edit this documento proyecto", edit_documento_proyecto_path(@documento_proyecto) %> |
-  <%= link_to "Back to documento proyectos", documento_proyectos_path %>
+  <%= link_to "Editar documento proyecto", edit_documento_proyecto_path(@documento_proyecto) %> |
+  <%= link_to "Volver a documento proyectos", documento_proyectos_path %>
 
-  <%= button_to "Destroy this documento proyecto", @documento_proyecto, method: :delete %>
+  <%= button_to "Eliminar documento proyecto", @documento_proyecto, method: :delete %>
 </div>

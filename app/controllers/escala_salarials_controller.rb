@@ -25,7 +25,7 @@ class EscalaSalarialsController < ApplicationController
 
     respond_to do |format|
       if @escala_salarial.save
-        format.html { redirect_to @escala_salarial, notice: "Escala salarial was successfully created." }
+        format.html { redirect_to @escala_salarial, notice: "Escala salarial creado correctamente." }
         format.json { render :show, status: :created, location: @escala_salarial }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class EscalaSalarialsController < ApplicationController
   def update
     respond_to do |format|
       if @escala_salarial.update(escala_salarial_params)
-        format.html { redirect_to @escala_salarial, notice: "Escala salarial was successfully updated." }
+        format.html { redirect_to @escala_salarial, notice: "Escala salarial actualizado correctamente." }
         format.json { render :show, status: :ok, location: @escala_salarial }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class EscalaSalarialsController < ApplicationController
     @escala_salarial.destroy!
 
     respond_to do |format|
-      format.html { redirect_to escala_salarials_path, status: :see_other, notice: "Escala salarial was successfully destroyed." }
+      format.html { redirect_to escala_salarials_path, status: :see_other, notice: "Escala salarial eliminado correctamente." }
       format.json { head :no_content }
     end
   end

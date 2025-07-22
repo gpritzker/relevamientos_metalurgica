@@ -25,7 +25,7 @@ class SectorsController < ApplicationController
 
     respond_to do |format|
       if @sector.save
-        format.html { redirect_to @sector, notice: "Sector was successfully created." }
+        format.html { redirect_to @sector, notice: "Sector creado correctamente." }
         format.json { render :show, status: :created, location: @sector }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class SectorsController < ApplicationController
     @sector.destroy!
 
     respond_to do |format|
-      format.html { redirect_to sectors_path, status: :see_other, notice: "Sector was successfully destroyed." }
+      format.html { redirect_to sectors_path, status: :see_other, notice: "Sector eliminado correctamente." }
       format.json { head :no_content }
     end
   end

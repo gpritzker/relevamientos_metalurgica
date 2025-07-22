@@ -25,7 +25,7 @@ class OperariosController < ApplicationController
 
     respond_to do |format|
       if @operario.save
-        format.html { redirect_to @operario, notice: "Operario was successfully created." }
+        format.html { redirect_to @operario, notice: "Operario creado correctamente." }
         format.json { render :show, status: :created, location: @operario }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class OperariosController < ApplicationController
     @operario.destroy!
 
     respond_to do |format|
-      format.html { redirect_to operarios_path, status: :see_other, notice: "Operario was successfully destroyed." }
+      format.html { redirect_to operarios_path, status: :see_other, notice: "Operario eliminado correctamente." }
       format.json { head :no_content }
     end
   end
