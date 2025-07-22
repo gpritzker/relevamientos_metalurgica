@@ -25,7 +25,7 @@ class TipoObrasController < ApplicationController
 
     respond_to do |format|
       if @tipo_obra.save
-        format.html { redirect_to @tipo_obra, notice: "Tipo obra was successfully created." }
+        format.html { redirect_to @tipo_obra, notice: t("flash.created", model: "Tipo obra") }
         format.json { render :show, status: :created, location: @tipo_obra }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TipoObrasController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_obra.update(tipo_obra_params)
-        format.html { redirect_to @tipo_obra, notice: "Tipo obra was successfully updated." }
+        format.html { redirect_to @tipo_obra, notice: t("flash.updated", model: "Tipo obra") }
         format.json { render :show, status: :ok, location: @tipo_obra }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class TipoObrasController < ApplicationController
     @tipo_obra.destroy!
 
     respond_to do |format|
-      format.html { redirect_to tipo_obras_path, status: :see_other, notice: "Tipo obra was successfully destroyed." }
+      format.html { redirect_to tipo_obras_path, status: :see_other, notice: t("flash.destroyed", model: "Tipo obra") }
       format.json { head :no_content }
     end
   end

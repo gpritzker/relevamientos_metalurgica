@@ -29,7 +29,7 @@ class ParteDiariosController < ApplicationController
 
     respond_to do |format|
       if @parte_diario.save
-        format.html { redirect_to @parte_diario, notice: "Parte diario was successfully created." }
+        format.html { redirect_to @parte_diario, notice: t("flash.created", model: "Parte diario") }
         format.json { render :show, status: :created, location: @parte_diario }
       else
         flash.now[:alert] = @parte_diario.errors.full_messages.join(', ')

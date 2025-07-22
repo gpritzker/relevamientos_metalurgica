@@ -25,7 +25,7 @@ class DocumentoProyectosController < ApplicationController
 
     respond_to do |format|
       if @documento_proyecto.save
-        format.html { redirect_to @documento_proyecto, notice: "Documento proyecto was successfully created." }
+        format.html { redirect_to @documento_proyecto, notice: t("flash.created", model: "Documento proyecto") }
         format.json { render :show, status: :created, location: @documento_proyecto }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class DocumentoProyectosController < ApplicationController
   def update
     respond_to do |format|
       if @documento_proyecto.update(documento_proyecto_params)
-        format.html { redirect_to @documento_proyecto, notice: "Documento proyecto was successfully updated." }
+        format.html { redirect_to @documento_proyecto, notice: t("flash.updated", model: "Documento proyecto") }
         format.json { render :show, status: :ok, location: @documento_proyecto }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class DocumentoProyectosController < ApplicationController
     @documento_proyecto.destroy!
 
     respond_to do |format|
-      format.html { redirect_to documento_proyectos_path, status: :see_other, notice: "Documento proyecto was successfully destroyed." }
+      format.html { redirect_to documento_proyectos_path, status: :see_other, notice: t("flash.destroyed", model: "Documento proyecto") }
       format.json { head :no_content }
     end
   end

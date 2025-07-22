@@ -12,38 +12,38 @@ class ParteDiariosTest < ApplicationSystemTestCase
 
   test "should create parte diario" do
     visit parte_diarios_url
-    click_on "New parte diario"
+    click_on "Nuevo Parte Diario"
 
     fill_in "Fecha", with: @parte_diario.fecha
     fill_in "Operario", with: @parte_diario.operario
     fill_in "Sector", with: @parte_diario.sector
     fill_in "Turno", with: @parte_diario.turno
     fill_in "Usuario", with: @parte_diario.usuario_id
-    click_on "Create Parte diario"
+    click_on "Crear Parte diario"
 
-    assert_text "Parte diario was successfully created"
-    click_on "Back"
+    assert_text "Parte diario creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Parte diario" do
     visit parte_diario_url(@parte_diario)
-    click_on "Edit this parte diario", match: :first
+    click_on "Editar este parte diario", match: :first
 
     fill_in "Fecha", with: @parte_diario.fecha
     fill_in "Operario", with: @parte_diario.operario
     fill_in "Sector", with: @parte_diario.sector
     fill_in "Turno", with: @parte_diario.turno
     fill_in "Usuario", with: @parte_diario.usuario_id
-    click_on "Update Parte diario"
+    click_on "Actualizar Parte diario"
 
-    assert_text "Parte diario was successfully updated"
-    click_on "Back"
+    assert_text "Parte diario actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Parte diario" do
     visit parte_diario_url(@parte_diario)
-    click_on "Destroy this parte diario", match: :first
+    click_on "Eliminar este parte diario", match: :first
 
-    assert_text "Parte diario was successfully destroyed"
+    assert_text "Parte diario eliminado correctamente"
   end
 end

@@ -12,7 +12,7 @@ class DetalleProduccionsTest < ApplicationSystemTestCase
 
   test "should create detalle produccion" do
     visit detalle_produccions_url
-    click_on "New detalle produccion"
+    click_on "➕ Nuevo Detalle de Producción"
 
     fill_in "Aceptados", with: @detalle_produccion.aceptados
     fill_in "Cantidad a ejecutar", with: @detalle_produccion.cantidad_a_ejecutar
@@ -25,15 +25,15 @@ class DetalleProduccionsTest < ApplicationSystemTestCase
     fill_in "Parte produccion", with: @detalle_produccion.parte_produccion_id
     fill_in "Rechazados", with: @detalle_produccion.rechazados
     fill_in "Tiempo empleado", with: @detalle_produccion.tiempo_empleado
-    click_on "Create Detalle produccion"
+    click_on "Crear Detalle produccion"
 
-    assert_text "Detalle produccion was successfully created"
-    click_on "Back"
+    assert_text "Detalle produccion creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Detalle produccion" do
     visit detalle_produccion_url(@detalle_produccion)
-    click_on "Edit this detalle produccion", match: :first
+    click_on "Editar este detalle produccion", match: :first
 
     fill_in "Aceptados", with: @detalle_produccion.aceptados
     fill_in "Cantidad a ejecutar", with: @detalle_produccion.cantidad_a_ejecutar
@@ -46,16 +46,16 @@ class DetalleProduccionsTest < ApplicationSystemTestCase
     fill_in "Parte produccion", with: @detalle_produccion.parte_produccion_id
     fill_in "Rechazados", with: @detalle_produccion.rechazados
     fill_in "Tiempo empleado", with: @detalle_produccion.tiempo_empleado
-    click_on "Update Detalle produccion"
+    click_on "Actualizar Detalle produccion"
 
-    assert_text "Detalle produccion was successfully updated"
-    click_on "Back"
+    assert_text "Detalle produccion actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Detalle produccion" do
     visit detalle_produccion_url(@detalle_produccion)
-    click_on "Destroy this detalle produccion", match: :first
+    click_on "Eliminar este detalle produccion", match: :first
 
-    assert_text "Detalle produccion was successfully destroyed"
+    assert_text "Detalle produccion eliminado correctamente"
   end
 end

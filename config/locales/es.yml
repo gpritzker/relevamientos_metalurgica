@@ -22,3 +22,7 @@ es:
       previous: "Anterior"
       next: "Siguiente"
       truncate: "…"
+  flash:
+    created: "%{model} creado correctamente"
+    updated: "%{model} actualizado correctamente"
+    destroyed: "%{model} eliminado correctamente"

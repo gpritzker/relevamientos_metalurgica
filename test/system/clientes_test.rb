@@ -12,7 +12,7 @@ class ClientesTest < ApplicationSystemTestCase
 
   test "should create cliente" do
     visit clientes_url
-    click_on "New cliente"
+    click_on "➕ Nuevo Cliente"
 
     fill_in "Cuit", with: @cliente.cuit
     fill_in "Direccion", with: @cliente.direccion
@@ -20,15 +20,15 @@ class ClientesTest < ApplicationSystemTestCase
     fill_in "Nombre", with: @cliente.nombre
     fill_in "Observaciones", with: @cliente.observaciones
     fill_in "Telefono", with: @cliente.telefono
-    click_on "Create Cliente"
+    click_on "Crear Cliente"
 
-    assert_text "Cliente was successfully created"
-    click_on "Back"
+    assert_text "Cliente creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Cliente" do
     visit cliente_url(@cliente)
-    click_on "Edit this cliente", match: :first
+    click_on "Editar este cliente", match: :first
 
     fill_in "Cuit", with: @cliente.cuit
     fill_in "Direccion", with: @cliente.direccion
@@ -36,16 +36,16 @@ class ClientesTest < ApplicationSystemTestCase
     fill_in "Nombre", with: @cliente.nombre
     fill_in "Observaciones", with: @cliente.observaciones
     fill_in "Telefono", with: @cliente.telefono
-    click_on "Update Cliente"
+    click_on "Actualizar Cliente"
 
-    assert_text "Cliente was successfully updated"
-    click_on "Back"
+    assert_text "Cliente actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Cliente" do
     visit cliente_url(@cliente)
-    click_on "Destroy this cliente", match: :first
+    click_on "Eliminar este cliente", match: :first
 
-    assert_text "Cliente was successfully destroyed"
+    assert_text "Cliente eliminado correctamente"
   end
 end

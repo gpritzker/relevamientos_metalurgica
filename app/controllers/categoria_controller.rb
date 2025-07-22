@@ -25,7 +25,7 @@ class CategoriaController < ApplicationController
 
     respond_to do |format|
       if @categorium.save
-        format.html { redirect_to @categorium, notice: "Categorium was successfully created." }
+        format.html { redirect_to @categorium, notice: t("flash.created", model: "Categorium") }
         format.json { render :show, status: :created, location: @categorium }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class CategoriaController < ApplicationController
     @categorium.destroy!
 
     respond_to do |format|
-      format.html { redirect_to categoria_path, status: :see_other, notice: "Categorium was successfully destroyed." }
+      format.html { redirect_to categoria_path, status: :see_other, notice: t("flash.destroyed", model: "Categorium") }
       format.json { head :no_content }
     end
   end

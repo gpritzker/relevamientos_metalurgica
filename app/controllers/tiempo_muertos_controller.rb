@@ -27,7 +27,7 @@ class TiempoMuertosController < ApplicationController
 
     respond_to do |format|
       if @tiempo_muerto.save
-        format.html { redirect_to @tiempo_muerto, notice: "Tiempo muerto was successfully created." }
+        format.html { redirect_to @tiempo_muerto, notice: t("flash.created", model: "Tiempo muerto") }
         format.json { render :show, status: :created, location: @tiempo_muerto }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class TiempoMuertosController < ApplicationController
     @tiempo_muerto.destroy!
 
     respond_to do |format|
-      format.html { redirect_to tiempo_muertos_path, status: :see_other, notice: "Tiempo muerto was successfully destroyed." }
+      format.html { redirect_to tiempo_muertos_path, status: :see_other, notice: t("flash.destroyed", model: "Tiempo muerto") }
       format.json { head :no_content }
     end
   end

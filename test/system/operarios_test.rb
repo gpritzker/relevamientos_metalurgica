@@ -12,36 +12,36 @@ class OperariosTest < ApplicationSystemTestCase
 
   test "should create operario" do
     visit operarios_url
-    click_on "New operario"
+    click_on "Nuevo Operario"
 
     check "Activo" if @operario.activo
     fill_in "Legajo", with: @operario.legajo
     fill_in "Nombre", with: @operario.nombre
     fill_in "Sector", with: @operario.sector
-    click_on "Create Operario"
+    click_on "Crear Operario"
 
-    assert_text "Operario was successfully created"
-    click_on "Back"
+    assert_text "Operario creado correctamente"
+    click_on "Volver"
   end
 
   test "should update Operario" do
     visit operario_url(@operario)
-    click_on "Edit this operario", match: :first
+    click_on "Editar este operario", match: :first
 
     check "Activo" if @operario.activo
     fill_in "Legajo", with: @operario.legajo
     fill_in "Nombre", with: @operario.nombre
     fill_in "Sector", with: @operario.sector
-    click_on "Update Operario"
+    click_on "Actualizar Operario"
 
-    assert_text "Operario was successfully updated"
-    click_on "Back"
+    assert_text "Operario actualizado correctamente"
+    click_on "Volver"
   end
 
   test "should destroy Operario" do
     visit operario_url(@operario)
-    click_on "Destroy this operario", match: :first
+    click_on "Eliminar este operario", match: :first
 
-    assert_text "Operario was successfully destroyed"
+    assert_text "Operario eliminado correctamente"
   end
 end
