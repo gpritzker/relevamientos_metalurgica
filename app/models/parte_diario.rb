@@ -21,4 +21,33 @@ class ParteDiario < ApplicationRecord
     attrs['hora_fin'].blank?
   }
 
+  validates :fecha, :hora_inicio, :hora_fin, :usuario, :sector, :operario, presence: true
+  validates_associated :tareas_realizadas, :tiempos_muertos
+
+  validate :validar_jornada_laboral
+
+  private
+
+  def validar_jornada_laboral
+    return if hora_inicio.blank? || hora_fin.blank?
+
+    jornada = (hora_fin - hora_inicio) / 60.0
+
+    total_tareas = tareas_realizadas.reject(&:marked_for_destruction?).sum do |t|
+      calcular_minutos(t.hora_inicio, t.hora_fin)
+    end
+
+    total_tiempos_muertos = tiempos_muertos.reject(&:marked_for_destruction?).sum do |tm|
+      calcular_minutos(tm.hora_inicio, tm.hora_fin)
+    end
+
+    if total_tareas + total_tiempos_muertos > jornada
+      errors.add(:base, 'La sumatoria de las horas de tareas y tiempos muertos no puede exceder la jornada laboral')
+    end
+  end
+
+  def calcular_minutos(inicio, fin)
+    return 0 if inicio.blank? || fin.blank?
+    (fin - inicio) / 60.0
+  end
 end
